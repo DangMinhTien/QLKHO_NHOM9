@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+H1X5sNjyODWFOFz4if5lPcy9Lcv39qWULkhftwv2YysZdw1olyPMilSfqmaX4ro7AixcEaiWHFq2DiplXbWnQ==",
+  "dgSpecHash": "o6aq1HRrUis7Qns8ZmIljzBVoVMnysruSJfSL5a9VHPSPZ01neFjpQoZ0QAv9VAYFFDEJyfeXd13wiTtzmnunA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\LENOVO\\OneDrive\\Documents\\Wordspace\\ThucTapCN\\Code\\QLKHO\\QLKHO\\QLKHO.csproj",
+  "projectFilePath": "C:\\Users\\LENOVO\\OneDrive\\Documents\\Wordspace\\ThucTapCN\\Code\\Nhom9\\QLKHONhom9\\QLKHO\\QLKHO.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\LENOVO\\.nuget\\packages\\bootstrap\\5.2.3\\bootstrap.5.2.3.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\bouncycastle.cryptography\\2.1.1\\bouncycastle.cryptography.2.1.1.nupkg.sha512",
