@@ -1,0 +1,51 @@
+﻿@model QLKHO.Models.SanPham
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<partial name="_AlertMessage" model="@TempData["thongbao"]"></partial>
+<h1>Xóa sản phẩm</h1>
+
+<h3>Bạn có muốn xóa sản phẩm này không ?</h3>
+<div>
+    <h4>SanPham</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TenSp)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TenSp)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GiaBan)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GiaBan)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SoLuongCo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SoLuongCo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Photo)
+        </dt>
+        <dd class = "col-sm-10">
+            <img class="img-thumbnail" style="width:100px; height:80px; object-fit:cover" 
+            src="~/Upload/PhotoSanPham/@Model.Photo">
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DonViTinh)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DonViTinh.TenDvt)
+        </dd class>
+    </dl>
+    
+    <form asp-action="Delete" asp-route-id="@Model.MaSp" method="post">
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a class="btn btn-primary" asp-action="Index">Danh sách sản phẩm</a>
+    </form>
+</div>

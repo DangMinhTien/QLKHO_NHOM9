@@ -1,0 +1,71 @@
+﻿@model QLKHO.Models.KhachHang
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h4>Chi tiết Khách Hàng</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MaKh)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MaKh)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TenKh)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TenKh)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-success" asp-action="Edit" asp-route-id="@Model.MaKh">Sửa</a> |
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myKH">
+        Xóa
+    </button>
+
+    <!-- The Modal -->
+    <div class="modal" id="myKH">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Xóa Khách Hàng</h4>
+                    <button type="button" class="btn btn-close" data-bs-dismiss="modal">&times</button>
+                </div>
+                <form asp-action="Delete" method="post" asp-route-id="@Model.MaKh">
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <h5 class="text-center">Bạn có muốn xóa khách hàng có tên @Model.TenKh không ?</h5>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Xóa</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="my-2">
+    <a asp-action="Index" class="btn btn-primary">Quay lại danh sách</a>
+</div>

@@ -1,0 +1,100 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using System.Globalization
+@model QLKHO.Areas.PhieuXuats.Controllers.PhieuXuatController.InputDetails
+@{
+    ViewData["title"] = "Chi tiết phiếu xuất";
+    var i = 1;
+}
+<div>
+    <h2 class="text-center">Phiếu Xuất</h2>
+    <div class="row">
+        <div class="col-sm-4">
+            <p>Mã Phiếu: @Model.MaPx.</p>
+            <p>Ngày Lập: @String.Format("{0:dd/MM/yyyy}", Model.phieuXuat.NgayLap).</p>
+            <p>Tổng số lượng: @Model.phieuXuat.TongSoLuong.</p>
+        </div>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            @if (Model.user != null)
+            {
+                <p>Người Lập: @Model.user.UserName - @Model.user.FullName.</p>
+            }
+            @if (Model.khachHang != null)
+            {
+                <p>Khách Hàng: @Model.khachHang.TenKh</p>
+            }
+            <p>Tổng Tiền: @Model.phieuXuat.TongTien.ToString("C", new CultureInfo("vi-VN"))</p>
+        </div>
+    </div>
+    <div style="max-height: 800px" class="overflow-auto">
+        <table style="min-width: 600px" class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>STT</td>
+                    <td>Mã Sản Phẩm</td>
+                    <td>Tên Sản Phẩm</td>
+                    <td>Hình ảnh</td>
+                    <td>Số Lượng</td>
+                    <td>Đơn Giá</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.sanPham_phieuXuat)
+                {
+                    <tr>
+                        <td>
+                            @i
+                            @{
+                                i++;
+                            }
+                        </td>
+                        <td>@item.MaSp</td>
+                        <td>@item.TenSp</td>
+                        <td>
+                            <img class="img-thumbnail" style="width:100px; height:80px; object-fit:cover" src="~/Upload/PhotoSanPham/@item.Photo">
+                        </td>
+                        <td>@item.SoLuong</td>
+                        <td>@item.DonGia.ToString("C", new CultureInfo("vi-VN"))</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="my-2">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myPhieu">
+            Xóa Phiếu Xuất
+        </button>
+
+        <!-- The Modal -->
+        <div class="modal" id="myPhieu">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Xóa Phiếu Xuất</h4>
+                        <button type="button" class="btn btn-close" data-bs-dismiss="modal">&times</button>
+                    </div>
+                    <form asp-action="Delete" method="post" asp-route-id="@Model.MaPx">
+                        <div class="modal-body">
+                            <h5 class="text-center">Bạn có muốn xóa phiếu xuất có mã @Model.MaPx ?</h5>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Xóa</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                    <!-- Modal body -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="my-2">
+        <a class="btn btn-primary" asp-action="Index">Quay lại danh sách</a>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<QLKHO.Models.DonViTinh>
+
+@{
+    ViewData["Title"] = "Danh sách đơn vị tính";
+}
+<partial name="_AlertMessage" model="@TempData["thongbao"]"></partial>
+<h1>Danh sách đơn vị tính</h1>
+
+<p>
+    <a class="btn btn-outline-primary" asp-action="Create">Tạo mới</a>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaDvt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenDvt)
+            </th>
+            <th>
+                Hành động
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaDvt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenDvt)
+            </td>
+            <td>
+                <a class="btn btn-outline-primary my-1" asp-action="Edit" asp-route-id="@item.MaDvt">Edit</a> |
+                <a class="btn btn-outline-success my-1" asp-action="Details" asp-route-id="@item.MaDvt">Details</a> |
+                <a class="btn btn-outline-danger my-1" asp-action="Delete" asp-route-id="@item.MaDvt">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

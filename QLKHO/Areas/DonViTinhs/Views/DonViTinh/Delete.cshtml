@@ -1,0 +1,25 @@
+﻿@model QLKHO.Models.DonViTinh
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<partial name="_AlertMessage" model="@TempData["thongbao"]"></partial>
+<h1>Xóa Đơn Vị Tính</h1>
+
+<h3>Bạn có muốn xóa không?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TenDvt)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TenDvt)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete" asp-route-id="@Model.MaDvt">
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

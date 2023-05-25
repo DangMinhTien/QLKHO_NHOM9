@@ -1,0 +1,54 @@
+﻿@model QLKHO.Models.SanPham
+@using System.Globalization
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Chi tiết Sản Phẩm</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MaSp)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MaSp)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TenSp)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TenSp)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GiaBan)
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.GiaBan.ToString("C", new CultureInfo("vi-VN"))
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SoLuongCo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SoLuongCo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Photo)
+        </dt>
+        <dd class = "col-sm-10">
+            <img class="img-thumbnail" style="width:100px; height:80px; object-fit:cover" 
+            src="~/Upload/PhotoSanPham/@Model.Photo">
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DonViTinh)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DonViTinh.TenDvt)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-success" asp-action="Edit" asp-route-id="@Model.MaSp">Edit</a> |
+    <a class="btn btn-primary" asp-action="Index">Danh sách sản phẩm</a>
+</div>

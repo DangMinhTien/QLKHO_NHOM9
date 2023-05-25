@@ -1,0 +1,74 @@
+﻿@model IEnumerable<QLKHO.Models.SanPham>
+@using QLKHO.Helper
+@using System.Globalization;
+@{
+    ViewData["Title"] = "Danh sách sản phẩm";
+    var currentPage = ViewData["current"];
+    var countPage = ViewData["countpage"]  ;
+}
+    <partial name="_AlertMessage" model="@TempData["thongbao"]"></partial>
+    
+<h1>Danh sách sản phẩm</h1>
+
+<p>
+    <a class="btn btn-outline-primary" asp-action="Create">Tạo mới</a>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenSp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaBan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoLuongCo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DonViTinh)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSp)
+            </td>
+            <td>
+                    @item.GiaBan.ToString("C", new CultureInfo("vi-VN"))
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuongCo)
+            </td>
+            <td>
+                <img class="img-thumbnail" style="width:100px; height:80px; object-fit:cover" src="~/Upload/PhotoSanPham/@item.Photo">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonViTinh.TenDvt)
+            </td>
+            <td>
+                <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.MaSp">Edit</a> |
+                <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.MaSp">Details</a> |
+                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.MaSp">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@{
+    var pagemodel = new PagingModel()
+            {
+                currentPage = int.Parse(currentPage.ToString()),
+                countPage = int.Parse(countPage.ToString()),
+                generateUrl = (int? p) => Url.Action(nameof(Index), new{p = p})
+            };
+    <div class="float-right">
+        <partial name="_Paging" model="@pagemodel"></partial>
+    </div>
+}
