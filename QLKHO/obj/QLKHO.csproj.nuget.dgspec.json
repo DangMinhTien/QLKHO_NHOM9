@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LENOVO\\OneDrive\\Documents\\Wordspace\\ThucTapCN\\Code\\Nhom9\\QLKHONhom9\\QLKHO\\QLKHO.csproj": {}
+    "D:\\Semester 6\\QLKHONhom9\\QLKHO_NHOM9\\QLKHO\\QLKHO.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LENOVO\\OneDrive\\Documents\\Wordspace\\ThucTapCN\\Code\\Nhom9\\QLKHONhom9\\QLKHO\\QLKHO.csproj": {
+    "D:\\Semester 6\\QLKHONhom9\\QLKHO_NHOM9\\QLKHO\\QLKHO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LENOVO\\OneDrive\\Documents\\Wordspace\\ThucTapCN\\Code\\Nhom9\\QLKHONhom9\\QLKHO\\QLKHO.csproj",
+        "projectUniqueName": "D:\\Semester 6\\QLKHONhom9\\QLKHO_NHOM9\\QLKHO\\QLKHO.csproj",
         "projectName": "QLKHO",
-        "projectPath": "C:\\Users\\LENOVO\\OneDrive\\Documents\\Wordspace\\ThucTapCN\\Code\\Nhom9\\QLKHONhom9\\QLKHO\\QLKHO.csproj",
-        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LENOVO\\OneDrive\\Documents\\Wordspace\\ThucTapCN\\Code\\Nhom9\\QLKHONhom9\\QLKHO\\obj\\",
+        "projectPath": "D:\\Semester 6\\QLKHONhom9\\QLKHO_NHOM9\\QLKHO\\QLKHO.csproj",
+        "packagesPath": "C:\\Users\\dotru\\.nuget\\packages\\",
+        "outputPath": "D:\\Semester 6\\QLKHONhom9\\QLKHO_NHOM9\\QLKHO\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dotru\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,8 +26,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://packagesource": {}
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
@@ -129,6 +129,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[5.0.17, 5.0.17]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -137,7 +155,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
