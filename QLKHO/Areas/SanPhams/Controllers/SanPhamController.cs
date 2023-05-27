@@ -172,7 +172,7 @@ namespace QLKHO.Areas.SanPhams.Controllers
                 return RedirectToAction(nameof(Index));
             }
             TempData["thongbao"] = $"Error Tạo sản phẩm thất bại";
-            ViewData["MaDvt"] = new SelectList(_context.donViTinhs, "MaDvt", "TenDvt");
+            input.donViTinhs = new SelectList(_context.donViTinhs, "MaDvt", "TenDvt",input.MaDvt);
             return View(input);
         }
 

@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\QLKHO",
+    "\\QLKHO\\Areas",
+    "\\QLKHO\\Areas\\ThongKes",
+    "\\QLKHO\\Areas\\ThongKes\\Controllers"
   ],
+  "SelectedNode": "\\QLKHO\\Areas\\ThongKes\\Controllers\\ThongKeController.cs",
   "PreviewInSolutionExplorer": false
 }
