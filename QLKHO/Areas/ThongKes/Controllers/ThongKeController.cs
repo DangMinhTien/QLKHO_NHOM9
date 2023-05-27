@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace QLKHO.Areas.ThongKes.Controllers
 {
@@ -6,7 +7,7 @@ namespace QLKHO.Areas.ThongKes.Controllers
     [Route("/[controller]/[action]")]
     public class ThongKeController : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return View();
         }
