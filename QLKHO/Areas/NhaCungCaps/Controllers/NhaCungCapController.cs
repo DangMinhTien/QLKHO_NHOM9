@@ -27,7 +27,7 @@ namespace QLKHO.Areas.NhaCungCaps.Controllers
 
         // GET: NhaCungCaps/NhaCungCap
         // Các biến dùng cho phân trang
-        public int ITEM_PER_PAGE = 2;
+        public int ITEM_PER_PAGE = 10;
         public int currentPage { get; set; }
         public int countPage { get; set; }
 
@@ -46,9 +46,17 @@ namespace QLKHO.Areas.NhaCungCaps.Controllers
                 currentPage = countPage;
 
             List<QLKHO.Models.NhaCungCap> nhaCungCaps;
-            nhaCungCaps = await _context.nhaCungCaps
-                        .Skip((currentPage - 1) * ITEM_PER_PAGE)
-                        .Take(ITEM_PER_PAGE).ToListAsync();
+            if(total > 0)
+            {
+                nhaCungCaps = await _context.nhaCungCaps
+                            .Skip((currentPage - 1) * ITEM_PER_PAGE)
+                            .Take(ITEM_PER_PAGE).ToListAsync();
+
+            }
+            else
+            {
+                nhaCungCaps = await _context.nhaCungCaps.ToListAsync();
+            }
             ViewData["current"] = currentPage;
             ViewData["countpage"] = countPage;
             return View(nhaCungCaps);

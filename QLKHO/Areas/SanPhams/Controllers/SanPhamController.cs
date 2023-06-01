@@ -30,7 +30,7 @@ namespace QLKHO.Areas.SanPhams.Controllers
             _context = context;
         }
        
-        public int ITEM_PER_PAGE = 5;
+        public int ITEM_PER_PAGE = 10;
         public int currentPage { get; set; }
         public int countPage { get; set; }
         

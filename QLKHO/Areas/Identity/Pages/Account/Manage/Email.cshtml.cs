@@ -70,8 +70,7 @@ namespace QLKHO.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-
-            await LoadAsync(user);
+            Email = await _userManager.GetEmailAsync(user);
             return Page();
         }
 

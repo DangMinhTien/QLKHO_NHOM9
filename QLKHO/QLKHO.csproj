@@ -43,7 +43,6 @@
     <Folder Include="Areas\PhieuNhaps\Models\" />
     <Folder Include="Areas\PhieuXuats\Data\" />
     <Folder Include="Areas\PhieuXuats\Models\" />
-    <Folder Include="Areas\PhieuXuats\Views - Copy\" />
     <Folder Include="Areas\SanPhams\Data\" />
     <Folder Include="Areas\SanPhams\Models\" />
     <Folder Include="wwwroot\Upload\Avartar\" />

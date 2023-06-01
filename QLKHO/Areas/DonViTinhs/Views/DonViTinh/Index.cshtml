@@ -33,9 +33,41 @@
                 @Html.DisplayFor(modelItem => item.TenDvt)
             </td>
             <td>
-                <a class="btn btn-outline-primary my-1" asp-action="Edit" asp-route-id="@item.MaDvt">Edit</a> |
-                <a class="btn btn-outline-success my-1" asp-action="Details" asp-route-id="@item.MaDvt">Details</a> |
-                <a class="btn btn-outline-danger my-1" asp-action="Delete" asp-route-id="@item.MaDvt">Delete</a>
+                <a class="btn btn-outline-primary my-1" asp-action="Edit" asp-route-id="@item.MaDvt">Sửa</a> |
+                    @{
+                        var id = "KH" + item.MaDvt;
+                        var select = "#" + id;
+                    }
+                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="@select">
+                        Xóa
+                    </button>
+
+                    <!-- The Modal -->
+                    <div class="modal" id="@id">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Xóa Đơn vị tính</h4>
+                                    <button type="button" class="btn btn-close" data-bs-dismiss="modal">&times</button>
+                                </div>
+                                <form asp-action="Delete" method="post" asp-route-id="@item.MaDvt">
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <h5 class="text-center">Bạn có muốn xóa đơn vị tính có tên @item.TenDvt không ?</h5>
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Xóa</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
             </td>
         </tr>
 }

@@ -5,14 +5,14 @@
 <h2>Danh sách các Role</h2>
 <partial name="_StatusMessage" model="@Model.StatusMessage"></partial>
 <div>
-    <a class="btn btn-primary" asp-page="./Create">Tạo Role</a>
+    <a class="btn btn-primary mb-2" asp-page="./Create">Tạo quyền</a>
 </div>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Mã Role</th>
-            <th>Tên Role</th>
+            <th>Mã quyền</th>
+            <th>Tên quyền</th>
             <th>Tác vụ</th>
         </tr>
     </thead>
@@ -24,7 +24,7 @@
                 <td>@role.Name</td>
                 <td>
                     <a class="btn btn-success" asp-page="./Edit" asp-route-roleid="@role.Id">Chỉnh sửa</a> |
-                    <a class="btn btn-success" asp-page="./Delete" asp-route-roleid="@role.Id">Xóa</a>
+                    <a class="btn btn-danger" asp-page="./Delete" asp-route-roleid="@role.Id">Xóa</a>
                 </td>
             </tr>
         }

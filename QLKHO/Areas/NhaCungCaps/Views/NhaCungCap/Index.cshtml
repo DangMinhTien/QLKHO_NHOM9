@@ -41,9 +41,42 @@
                     @Html.DisplayFor(modelItem => item.Sdt)
                 </td>
                 <td class="d-flex justify-content-around">
-                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.MaNcc">Edit</a> |
-                    <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.MaNcc">Details</a> |
-                    <a class="btn btn-outline-danger"  asp-action="Delete" asp-route-id="@item.MaNcc">Delete</a>
+                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.MaNcc">Sửa</a> |
+                    <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.MaNcc">Chi tiết</a> |
+                        @{
+                            var id = "KH" + item.MaNcc;
+                            var select = "#" + id;
+                        }
+                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="@select">
+                            Xóa
+                        </button>
+
+                        <!-- The Modal -->
+                        <div class="modal" id="@id">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Xóa Nhà cung cấp</h4>
+                                        <button type="button" class="btn btn-close" data-bs-dismiss="modal">&times</button>
+                                    </div>
+                                    <form asp-action="Delete" method="post" asp-route-id="@item.MaNcc">
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            <h5 class="text-center">Bạn có muốn xóa nhà cung cấp có tên @item.TenNcc không ?</h5>
+                                        </div>
+
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">Xóa</button>
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
                 </td>
             </tr>
     }

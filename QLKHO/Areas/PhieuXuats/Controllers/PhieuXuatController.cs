@@ -43,11 +43,7 @@ namespace QLKHO.Areas.PhieuXuats.Controllers
             [DisplayName("Ngày Lập Phiếu")]
             [Required(ErrorMessage = "{0} không được để trống")]
             public DateTime NgayLap { get; set; } = DateTime.Now.Date;
-            [Required(ErrorMessage = "Đơn giá không được để trống")]
-            [Range(0, int.MaxValue, ErrorMessage = "Đơn giá phải có giá trị từ {1} trở lên")]
             public decimal[] DonGia { get; set; }
-            [Required(ErrorMessage = "Số lượng không được để trống")]
-            [Range(1, int.MaxValue, ErrorMessage = "Số lượng phải có giá trị từ {1} đến số lượng của sản phẩm đó")]
             public int[] SoLuong { get; set; }
             [Required(ErrorMessage = "Phải chọn sản phẩm")]
             public int[] MaSp { get; set; }
