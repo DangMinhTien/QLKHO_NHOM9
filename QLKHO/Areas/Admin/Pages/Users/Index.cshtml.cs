@@ -1,4 +1,4 @@
-using QLKHO.Models;
+﻿using QLKHO.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -22,34 +22,46 @@ namespace QLKHO.Areas.Admin.Pages.Users
         public List<AppUser> users { get; set; }
 
 
-        //Tao ph�n trang
-        public const int ITEM_PER_PAGE = 10;
+        //Tao phân trang
+        public const int ITEM_PER_PAGE = 5;
         [BindProperty(SupportsGet = true, Name = "p")]
         public int currentPage { get; set; }
         public int countPage { get; set; }
+        //Tìm kiếm
+        [BindProperty(SupportsGet = true)]
+        public string search { get; set; }
         public IndexModel(UserManager<AppUser> _usermanage)
         {
             userManager = _usermanage;
         }
         public async Task OnGet()
         {
-            int total = await userManager.Users.CountAsync();
-            countPage = (int)Math.Ceiling((double)total/ ITEM_PER_PAGE);
-            if(currentPage < 1) 
+            if (String.IsNullOrEmpty(search))
+                search = "";
+            int total = await userManager.Users
+                .Where(u => u.UserName.Contains(search))
+                .CountAsync();
+
+            countPage = (int)Math.Ceiling((double)total / ITEM_PER_PAGE);
+            if (currentPage < 1)
                 currentPage = 1;
-            if(currentPage > countPage)
+            if (currentPage > countPage)
                 currentPage = countPage;
-            if(await userManager.Users.CountAsync() > 0)
+
+            if (await userManager.Users.CountAsync() > 0)
             {
                 users = await userManager.Users
+                            .Where(u => u.UserName.Contains(search))
                             .Skip((currentPage - 1) * ITEM_PER_PAGE)
                             .Take(ITEM_PER_PAGE).ToListAsync();
             }
             else
             {
-                users = await userManager.Users.ToListAsync();
+                users = await userManager.Users
+                    .Where(u => u.UserName.Contains(search))
+                    .ToListAsync();
             }
-                        
+
         }
         public void OnPost()
         {

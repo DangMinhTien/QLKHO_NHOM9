@@ -4,12 +4,13 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>Đăng Ký</h1>
 
 <div class="row">
+    <div class="col-md-4"></div>
     <div class="col-md-4">
         <form method="post" asp-route-returnUrl="@Model.ReturnUrl" enctype="multipart/form-data">
-            <h4>Tạo tài khoản mới</h4>
+            <h1 class="mt-2">Đăng Ký</h1>
+            <h4 class="mt-2">Tạo tài khoản mới</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger">
 
@@ -61,6 +62,7 @@
             <button class="btn btn-danger" type="submit">Seed data</button>
         </form>
     </div>
+    <div class="col-md-4"></div>
 </div>
 @section Scripts
 {

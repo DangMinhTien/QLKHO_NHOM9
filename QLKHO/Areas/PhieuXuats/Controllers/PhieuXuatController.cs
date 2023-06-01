@@ -28,10 +28,37 @@ namespace QLKHO.Areas.PhieuXuats.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
-        public async Task<IActionResult> Index()
-        {
 
-            return View(await _context.phieuXuats.ToListAsync());
+        public int ITEM_PER_PAGE = 10;
+        public int currentPage { get; set; }
+        public int countPage { get; set; }
+        public async Task<IActionResult> Index(int? p)
+        {
+            if (p != null)
+            {
+                currentPage = p.Value;
+            }
+            int total = await _context.phieuXuats.CountAsync();
+
+            countPage = (int)Math.Ceiling((double)total / ITEM_PER_PAGE);
+            if (currentPage < 1)
+                currentPage = 1;
+            if (currentPage > countPage)
+                currentPage = countPage;
+            List<PhieuXuat> phieuXuats = new List<PhieuXuat>();
+            if(total > 0)
+            {
+                phieuXuats = await _context.phieuXuats
+                            .Skip((currentPage - 1) * ITEM_PER_PAGE)
+                            .Take(ITEM_PER_PAGE).ToListAsync();
+            }
+            else
+            {
+                phieuXuats = await _context.phieuXuats.ToListAsync();
+            }
+            ViewData["current"] = currentPage;
+            ViewData["countpage"] = countPage;
+            return View(phieuXuats);
         }
         public class InputModel
         {

@@ -22,11 +22,37 @@ namespace QLKHO.Areas.KhachHangs.Controllers
         {
             _context = context;
         }
-
+        public int ITEM_PER_PAGE = 10;
+        public int currentPage { get; set; }
+        public int countPage { get; set; }
         // GET: KhachHangs/KhachHang
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? p)
         {
-            return View(await _context.khachHangs.ToListAsync());
+            if (p != null)
+            {
+                currentPage = p.Value;
+            }
+            int total = await _context.khachHangs.CountAsync();
+
+            countPage = (int)Math.Ceiling((double)total / ITEM_PER_PAGE);
+            if (currentPage < 1)
+                currentPage = 1;
+            if (currentPage > countPage)
+                currentPage = countPage;
+            List<KhachHang> khachHangs = new List<KhachHang>();
+            if(total > 0)
+            {
+                khachHangs = await _context.khachHangs
+                            .Skip((currentPage - 1) * ITEM_PER_PAGE)
+                            .Take(ITEM_PER_PAGE).ToListAsync();
+            }
+            else
+            {
+                khachHangs = await _context.khachHangs.ToListAsync();
+            }
+            ViewData["current"] = currentPage;
+            ViewData["countpage"] = countPage;
+            return View(khachHangs);
         }
 
         // GET: KhachHangs/KhachHang/Details/5

@@ -1,8 +1,10 @@
 ﻿@model IEnumerable<QLKHO.Models.KhachHang>
-
+@using QLKHO.Helper
 @{
     ViewData["Title"] = "Index";
     var i = 1;
+    var currentPage = ViewData["current"];
+    var countPage = ViewData["countpage"];
 }
 <partial name="_AlertMessage" model="@TempData["thongbao"]"></partial>
 <h1>Danh sách Khách Hàng</h1>
@@ -88,3 +90,14 @@
         </tbody>
     </table>
 </div>
+@{
+    var pagemodel = new PagingModel()
+    {
+        currentPage = int.Parse(currentPage.ToString()),
+        countPage = int.Parse(countPage.ToString()),
+        generateUrl = (int? p) => Url.Action(nameof(Index), new { p = p })
+    };
+    <div class="float-right">
+        <partial name="_Paging" model="@pagemodel"></partial>
+    </div>
+}

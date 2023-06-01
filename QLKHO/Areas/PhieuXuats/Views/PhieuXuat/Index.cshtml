@@ -2,9 +2,12 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @using System.Globalization
+@using QLKHO.Helper
 @model List<QLKHO.Models.PhieuXuat>
 @{
     ViewData["title"] = "Danh sách phiếu xuất";
+    var currentPage = ViewData["current"];
+    var countPage = ViewData["countpage"];
 }
 <partial name="_AlertMessage" model="@TempData["thongbao"]"></partial>
 <h1>Danh sách Phiếu Nhập</h1>
@@ -84,3 +87,14 @@
         </tbody>
     </table>
 </div>
+@{
+    var pagemodel = new PagingModel()
+            {
+                currentPage = int.Parse(currentPage.ToString()),
+                countPage = int.Parse(countPage.ToString()),
+                generateUrl = (int? p) => Url.Action(nameof(Index), new { p = p })
+            };
+    <div class="float-right">
+            <partial name="_Paging" model="@pagemodel"></partial>
+    </div>
+}

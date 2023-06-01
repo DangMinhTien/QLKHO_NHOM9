@@ -6,6 +6,19 @@
 }
 <partial name="_StatusMessage" model="@Model.StatusMessage"></partial>
 <h2>Danh sách các Tài khoản</h2>
+<div class="my-3">
+    <form method="get" class=" form-inline mr-auto my-2 mw-100 navbar-search">
+        <div class="input-group">
+            <input asp-for="@Model.search" class="form-control bg-light border-0 small" placeholder="Tìm theo username"
+                   aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -52,7 +65,7 @@
             {
                 currentPage = Model.currentPage,
                 countPage = Model.countPage,
-                generateUrl = (int? p) => Url.Page("./Index", new { p = p })
+                generateUrl = (int? p) => Url.Page("./Index", new { p = p, search = Model.search })
             };
-        <partial name="_Paging" model="@pagemodel"></partial>
+    <partial name="_Paging" model="@pagemodel"></partial>
 }

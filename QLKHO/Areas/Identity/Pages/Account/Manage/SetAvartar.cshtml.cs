@@ -35,9 +35,9 @@ namespace QLKHO.Areas.Identity.Pages.Account.Manage
         {
             
         }
-        public async Task OnPost(string? Id)
+        public async Task OnPost(string Id)
         {
-            if(Id != null)
+            if(!string.IsNullOrEmpty(Id))
             {
                 AppUser user = await _userManager.FindByIdAsync(Id);
                 if(user != null)

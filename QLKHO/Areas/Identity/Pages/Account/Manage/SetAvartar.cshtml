@@ -5,6 +5,7 @@
 @{
     ViewData["Title"] = "Avartar";
 }
+<h4>Thay ảnh đại diện</h4>
 @if (_signInManager.IsSignedIn(User))
 {
     AppUser user = await _userManager.GetUserAsync(User);
