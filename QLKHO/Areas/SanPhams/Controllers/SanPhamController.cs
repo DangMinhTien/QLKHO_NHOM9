@@ -64,25 +64,7 @@ namespace QLKHO.Areas.SanPhams.Controllers
             return View(sanphams);
         }
 
-        // GET: SanPhams/SanPham/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var sanPham = await _context.sanPhams
-                .Include(s => s.DonViTinh)
-                .FirstOrDefaultAsync(m => m.MaSp == id);
-            if (sanPham == null)
-            {
-                return NotFound();
-            }
-
-            return View(sanPham);
-        }
-
+        
         // GET: SanPhams/SanPham/Create
         public async Task<IActionResult> Create()
         {
@@ -284,23 +266,7 @@ namespace QLKHO.Areas.SanPhams.Controllers
 
         // GET: SanPhams/SanPham/Delete/5
         
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var sanPham = await _context.sanPhams
-                .Include(s => s.DonViTinh)
-                .FirstOrDefaultAsync(m => m.MaSp == id);
-            if (sanPham == null)
-            {
-                return NotFound();
-            }
-
-            return View(sanPham);
-        }
+        
 
         // POST: SanPhams/SanPham/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -314,7 +280,7 @@ namespace QLKHO.Areas.SanPhams.Controllers
             if (sanPham == null)
             {
                 TempData["thongbao"] = $"Error Xóa thất bại do không tìm thấy sản phẩm";
-                return RedirectToAction(nameof(Delete));
+                return RedirectToAction(nameof(Index));
             }
             try
             {
@@ -324,7 +290,7 @@ namespace QLKHO.Areas.SanPhams.Controllers
             catch(Exception ex)
             {
                 TempData["thongbao"] = $"Error Xóa thất bại do sản phẩm này đang tồn tại trong phiếu xuất hoặc phiếu nhập";
-                return RedirectToAction(nameof(Delete), new {id = id});
+                return RedirectToAction(nameof(Index));
             }
             TempData["thongbao"] = $"Bạn vừa Xóa thành công sản phẩm có mã {id}";
             return RedirectToAction(nameof(Index));

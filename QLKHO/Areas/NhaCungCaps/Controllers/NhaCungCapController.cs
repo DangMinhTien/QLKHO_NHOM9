@@ -328,23 +328,7 @@ namespace QLKHO.Areas.NhaCungCaps.Controllers
             return View(nhaCungCap);
         }
 
-        // GET: NhaCungCaps/NhaCungCap/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var nhaCungCap = await _context.nhaCungCaps
-                .FirstOrDefaultAsync(m => m.MaNcc == id);
-            if (nhaCungCap == null)
-            {
-                return NotFound();
-            }
-
-            return View(nhaCungCap);
-        }
+        
 
         // POST: NhaCungCaps/NhaCungCap/Delete/5
         [HttpPost, ActionName("Delete")]

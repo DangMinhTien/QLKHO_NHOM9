@@ -18,6 +18,9 @@
             <tr>
                 <th>STT</th>
                 <th>
+                    @Html.DisplayNameFor(model => model.MaKh)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.TenKh)
                 </th>
                 <th>
@@ -39,6 +42,9 @@
                     @{i++;}
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.MaKh)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.TenKh)
                 </td>
                 <td>
@@ -49,7 +55,6 @@
                 </td>
                 <td class="d-flex justify-content-around">
                     <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.MaKh">Sửa</a> |
-                    <a class="btn btn-outline-success" asp-action="Details" asp-route-id="@item.MaKh">Chi tiết</a> |
                         @{
                             var id = "KH" + item.MaKh;
                             var select = "#" + id;

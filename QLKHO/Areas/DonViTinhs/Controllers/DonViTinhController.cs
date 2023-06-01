@@ -29,23 +29,7 @@ namespace QLKHO.Areas.DonViTinhs.Controllers
             return View(await _context.donViTinhs.ToListAsync());
         }
 
-        // GET: DonViTinhs/DonViTinh/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var donViTinh = await _context.donViTinhs
-                .FirstOrDefaultAsync(m => m.MaDvt == id);
-            if (donViTinh == null)
-            {
-                return NotFound();
-            }
-
-            return View(donViTinh);
-        }
+        
 
         // GET: DonViTinhs/DonViTinh/Create
         public IActionResult Create()
@@ -117,23 +101,7 @@ namespace QLKHO.Areas.DonViTinhs.Controllers
             return View(donViTinh);
         }
 
-        // GET: DonViTinhs/DonViTinh/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var donViTinh = await _context.donViTinhs
-                .FirstOrDefaultAsync(m => m.MaDvt == id);
-            if (donViTinh == null)
-            {
-                return NotFound();
-            }
-
-            return View(donViTinh);
-        }
+       
 
         // POST: DonViTinhs/DonViTinh/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -157,7 +125,7 @@ namespace QLKHO.Areas.DonViTinhs.Controllers
             catch(Exception ex)
             {
                 TempData["thongbao"] = $"Error Xóa đơn vị tính thất bại";
-                return RedirectToAction(nameof(Delete), new {id = id});
+                return RedirectToAction(nameof(Index));
             }
             TempData["thongbao"] = $"Xóa đơn vị tính thành công";
             return RedirectToAction(nameof(Index));

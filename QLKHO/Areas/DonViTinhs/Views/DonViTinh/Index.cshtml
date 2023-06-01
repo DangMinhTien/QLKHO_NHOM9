@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Danh sách đơn vị tính";
+    var i = 1;
 }
 <partial name="_AlertMessage" model="@TempData["thongbao"]"></partial>
 <h1>Danh sách đơn vị tính</h1>
@@ -12,6 +13,9 @@
 <table class="table table-bordered">
     <thead>
         <tr>
+            <th>
+                STT
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.MaDvt)
             </th>
@@ -26,14 +30,18 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <th>
+                @i
+                @{i++;}
+            </th>
             <td>
                 @Html.DisplayFor(modelItem => item.MaDvt)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TenDvt)
             </td>
-            <td>
-                <a class="btn btn-outline-primary my-1" asp-action="Edit" asp-route-id="@item.MaDvt">Sửa</a> |
+            <td class="d-flex justify-content-around">
+                <a class="btn btn-outline-success my-1" asp-action="Edit" asp-route-id="@item.MaDvt">Sửa</a>
                     @{
                         var id = "KH" + item.MaDvt;
                         var select = "#" + id;

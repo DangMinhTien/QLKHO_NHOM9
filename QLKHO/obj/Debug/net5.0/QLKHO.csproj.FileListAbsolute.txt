@@ -1004,8 +1004,6 @@ C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QL
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\Admin\Pages\_ViewImports.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\Admin\Pages\_ViewStart.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\DonViTinhs\Views\DonViTinh\Create.cshtml.g.cs
-C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\DonViTinhs\Views\DonViTinh\Delete.cshtml.g.cs
-C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\DonViTinhs\Views\DonViTinh\Details.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\DonViTinhs\Views\DonViTinh\Edit.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\DonViTinhs\Views\DonViTinh\Index.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\DonViTinhs\Views\_ViewImports.cshtml.g.cs
@@ -1054,14 +1052,12 @@ C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QL
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\KhachHangs\Views\KhachHang\Create.cshtml.g.cs
-C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\KhachHangs\Views\KhachHang\Details.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\KhachHangs\Views\KhachHang\Edit.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\KhachHangs\Views\KhachHang\Index.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\KhachHangs\Views\_ViewImports.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\KhachHangs\Views\_ViewStart.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\NhaCungCaps\Views\NhaCungCap\AddSanPham.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\NhaCungCaps\Views\NhaCungCap\Create.cshtml.g.cs
-C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\NhaCungCaps\Views\NhaCungCap\Delete.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\NhaCungCaps\Views\NhaCungCap\Details.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\NhaCungCaps\Views\NhaCungCap\Edit.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\NhaCungCaps\Views\NhaCungCap\Index.cshtml.g.cs
@@ -1078,8 +1074,6 @@ C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QL
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\PhieuXuats\Views\_ViewImports.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\PhieuXuats\Views\_ViewStart.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\SanPhams\Views\SanPham\Create.cshtml.g.cs
-C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\SanPhams\Views\SanPham\Delete.cshtml.g.cs
-C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\SanPhams\Views\SanPham\Details.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\SanPhams\Views\SanPham\Edit.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\SanPhams\Views\SanPham\Index.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\SanPhams\Views\_ViewImports.cshtml.g.cs

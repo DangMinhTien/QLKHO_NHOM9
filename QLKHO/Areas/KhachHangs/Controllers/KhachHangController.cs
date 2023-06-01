@@ -55,23 +55,7 @@ namespace QLKHO.Areas.KhachHangs.Controllers
             return View(khachHangs);
         }
 
-        // GET: KhachHangs/KhachHang/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var khachHang = await _context.khachHangs
-                .SingleOrDefaultAsync(m => m.MaKh == id);
-            if (khachHang == null)
-            {
-                return NotFound("không tìm thấy khách hàng");
-            }
-
-            return View(khachHang);
-        }
+        
 
         // GET: KhachHangs/KhachHang/Create
         public IActionResult Create()
@@ -150,24 +134,6 @@ namespace QLKHO.Areas.KhachHangs.Controllers
                 TempData["thongbao"] = $"Bạn đã sửa thành công khách hàng có mã {khachHang.MaKh}";
                 return RedirectToAction(nameof(Index));
             }
-            return View(khachHang);
-        }
-
-        // GET: KhachHangs/KhachHang/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var khachHang = await _context.khachHangs
-                .FirstOrDefaultAsync(m => m.MaKh == id);
-            if (khachHang == null)
-            {
-                return NotFound();
-            }
-
             return View(khachHang);
         }
 
