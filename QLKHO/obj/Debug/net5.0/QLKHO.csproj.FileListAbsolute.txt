@@ -1098,3 +1098,6 @@ C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QL
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\QLKHO.pdb
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\QLKHO.genruntimeconfig.cache
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\ref\QLKHO.dll
+C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\ThongKes\Views\ThongKe\Index.cshtml.g.cs
+C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\ThongKes\Views\_ViewImports.cshtml.g.cs
+C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\Nhom9\QLKHO_NHOM9\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\ThongKes\Views\_ViewStart.cshtml.g.cs

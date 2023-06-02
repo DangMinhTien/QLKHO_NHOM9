@@ -45,6 +45,8 @@
     <Folder Include="Areas\PhieuXuats\Models\" />
     <Folder Include="Areas\SanPhams\Data\" />
     <Folder Include="Areas\SanPhams\Models\" />
+    <Folder Include="Areas\ThongKes\Data\" />
+    <Folder Include="Areas\ThongKes\Models\" />
     <Folder Include="wwwroot\Upload\Avartar\" />
     <Folder Include="wwwroot\Upload\PhotoSanPham\" />
   </ItemGroup>

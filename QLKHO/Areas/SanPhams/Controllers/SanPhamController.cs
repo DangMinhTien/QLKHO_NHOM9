@@ -49,7 +49,7 @@ namespace QLKHO.Areas.SanPhams.Controllers
             if (currentPage > countPage)
                 currentPage = countPage;
             List<SanPham> sanphams;
-            if (await _context.sanPhams.CountAsync() > 0)
+            if (total > 0)
             {
                 sanphams = await _context.sanPhams
                         .Skip((currentPage - 1) * ITEM_PER_PAGE)

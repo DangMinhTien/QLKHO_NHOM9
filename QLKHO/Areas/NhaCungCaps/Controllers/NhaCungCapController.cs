@@ -100,7 +100,7 @@ namespace QLKHO.Areas.NhaCungCaps.Controllers
             if (currentPage > countPage)
                 currentPage = countPage;
             List<ChiTietNhaCungCap> chiTietNhaCungCaps;
-            if (await _context.chiTietNhaCungCaps.Where(c => c.MaNcc == id).CountAsync() > 0)
+            if (total > 0)
             {
                 chiTietNhaCungCaps = await _context.chiTietNhaCungCaps
                                                     .Where(c => c.MaNcc == id).Skip((currentPage - 1) * ITEM_PER_PAGE)

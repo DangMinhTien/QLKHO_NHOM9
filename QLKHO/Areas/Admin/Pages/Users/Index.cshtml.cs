@@ -48,7 +48,7 @@ namespace QLKHO.Areas.Admin.Pages.Users
             if (currentPage > countPage)
                 currentPage = countPage;
 
-            if (await userManager.Users.CountAsync() > 0)
+            if (total > 0)
             {
                 users = await userManager.Users
                             .Where(u => u.UserName.Contains(search))

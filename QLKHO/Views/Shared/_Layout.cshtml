@@ -45,7 +45,10 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" asp-action="Index" asp-controller="Home">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    @*
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                    *@
+                    <i class="fas fa-home"></i>
                     <span>Trang chủ</span>
                 </a>
             </li>
@@ -55,7 +58,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Nhân Viên và Admin
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -77,7 +80,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#sanpham"
                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-luggage-cart"></i>
                     <span>Sản Phẩm</span>
                 </a>
                 <div id="sanpham" class="collapse" aria-labelledby="headingUtilities"
@@ -92,7 +95,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#nhacungcap"
                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-truck"></i>
                     <span>Nhà Cung Cấp</span>
                 </a>
                 <div id="nhacungcap" class="collapse" aria-labelledby="headingUtilities"
@@ -107,7 +110,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#phieunhap"
                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-file-import"></i>
                     <span>Nhập Hàng</span>
                 </a>
                 <div id="phieunhap" class="collapse" aria-labelledby="headingUtilities"
@@ -121,7 +124,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#khachhang"
                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-hands-helping"></i>
                     <span>Khách Hàng</span>
                 </a>
                 <div id="khachhang" class="collapse" aria-labelledby="headingUtilities"
@@ -135,7 +138,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#phieuxuat"
                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-file-export"></i>
                     <span>Xuất Hàng</span>
                 </a>
                 <div id="phieuxuat" class="collapse" aria-labelledby="headingUtilities"
@@ -147,7 +150,10 @@
                 </div>
             </li>
             <!-- Divider -->
-            <hr class="sidebar-divider">
+            <hr class="sidebar-divider"/>
+            <div class="sidebar-heading">
+                Quản Trị Viên
+            </div>
             @*
             <!-- Heading -->
             <div class="sidebar-heading">
@@ -192,15 +198,21 @@
             </li>
             *@
             <li class="nav-item">
+                <a class="nav-link" asp-action="Index" asp-controller="ThongKe" asp-area="ThongKes">
+                    <i class="fas fa-calculator"></i>
+                    <span>Thống kê</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" asp-page="/Roles/Index" asp-area="Admin">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Quản lý Vai Trò</span>
+                    <i class="fas fa-gavel"></i>
+                    <span>Quản lý Quyền</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" asp-page="/Users/Index" asp-area="Admin">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Quản lý Người dùng</span>
+                    <i class="fas fa-user"></i>
+                    <span>Quản lý Tài Khoản</span>
                 </a>
             </li>
             <!-- Divider -->
@@ -325,11 +337,15 @@
     <script src="~/Assets/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
+    @*
+
     <script src="~/Assets/vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="~/Assets/js/demo/chart-area-demo.js"></script>
     <script src="~/Assets/js/demo/chart-pie-demo.js"></script>
+
+    *@
     <script src="~/lib/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
     
     @await RenderSectionAsync("Scripts", required: false)

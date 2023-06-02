@@ -50,7 +50,7 @@ namespace QLKHO.Areas.PhieuNhaps.Controllers
                 currentPage = countPage;
 
             List<QLKHO.Models.PhieuNhap> phieuNhaps;
-            if(await _context.phieuNhaps.CountAsync() > 0)
+            if(total > 0)
             {
                 phieuNhaps = await _context.phieuNhaps
                             .Skip((currentPage - 1) * ITEM_PER_PAGE)

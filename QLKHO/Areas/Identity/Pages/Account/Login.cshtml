@@ -6,23 +6,24 @@
 }
 <partial name="_AlertMessage" model="@TempData["thongbao"]"></partial>
 <div class="row mt-2">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-12"></div>
+    <div class="col-md-4 col-sm-8">
         <h1>Đăng Nhập</h1>
+        <hr />
         <section>
             <form id="account" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                 <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
+                <div class="form-group my-3">
                     <label asp-for="Input.UserNameorEmail" class="form-label"></label>
                     <input asp-for="Input.UserNameorEmail" class="form-control" />
                     <span asp-validation-for="Input.UserNameorEmail" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group my-3">
                     <label asp-for="Input.Password" class="form-label"></label>
                     <input asp-for="Input.Password" class="form-control" />
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group my-3">
                     <div class="checkbox">
                         <label class="form-check-label" asp-for="Input.RememberMe">
                             <input asp-for="Input.RememberMe" />
@@ -30,10 +31,10 @@
                         </label>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group my-3">
                     <button type="submit" class="btn btn-primary">Đăng Nhập</button>
                 </div>
-                <div class="form-group">
+                <div class="form-group my-3">
                     <p>
                         <a id="forgot-password" asp-page="./ForgotPassword">Quên mật khẩu</a>
                     </p>
@@ -44,7 +45,7 @@
             </form>
         </section>
     </div>
-    <div class="col-md-4"></div>
+    <div class="col-md-4 col-sm-4"></div>
 </div>
 
 @section Scripts {
