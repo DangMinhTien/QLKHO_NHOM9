@@ -28,6 +28,7 @@ namespace QLKHO
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddDbContext<AppDbContext>(option =>
@@ -74,12 +75,17 @@ namespace QLKHO
                 option.LogoutPath = "/logout/";
                 option.AccessDeniedPath = "/accessdenied/";
             });
-
+           
         }
-
+            
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.Use(async (context, next) =>
+            {
+                context.Request.QueryString = context.Request.QueryString.Add("your_custom_key", "your_custom_value");
+                await next.Invoke();
+            });
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

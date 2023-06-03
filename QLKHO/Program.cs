@@ -20,6 +20,7 @@ namespace QLKHO
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    
                     webBuilder.UseStartup<Startup>();
                 });
     }

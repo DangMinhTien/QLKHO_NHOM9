@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LENOVO\\OneDrive\\Documents\\Wordspace\\ThucTapCN\\Code\\Nhom9\\QLKHO_NHOM9\\QLKHO_NHOM9\\QLKHO\\QLKHO.csproj": {}
+    "C:\\Users\\LENOVO\\OneDrive\\Documents\\Wordspace\\ThucTapCN\\Code\\QLKHO_NHOM9\\QLKHO\\QLKHO.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LENOVO\\OneDrive\\Documents\\Wordspace\\ThucTapCN\\Code\\Nhom9\\QLKHO_NHOM9\\QLKHO_NHOM9\\QLKHO\\QLKHO.csproj": {
+    "C:\\Users\\LENOVO\\OneDrive\\Documents\\Wordspace\\ThucTapCN\\Code\\QLKHO_NHOM9\\QLKHO\\QLKHO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LENOVO\\OneDrive\\Documents\\Wordspace\\ThucTapCN\\Code\\Nhom9\\QLKHO_NHOM9\\QLKHO_NHOM9\\QLKHO\\QLKHO.csproj",
+        "projectUniqueName": "C:\\Users\\LENOVO\\OneDrive\\Documents\\Wordspace\\ThucTapCN\\Code\\QLKHO_NHOM9\\QLKHO\\QLKHO.csproj",
         "projectName": "QLKHO",
-        "projectPath": "C:\\Users\\LENOVO\\OneDrive\\Documents\\Wordspace\\ThucTapCN\\Code\\Nhom9\\QLKHO_NHOM9\\QLKHO_NHOM9\\QLKHO\\QLKHO.csproj",
+        "projectPath": "C:\\Users\\LENOVO\\OneDrive\\Documents\\Wordspace\\ThucTapCN\\Code\\QLKHO_NHOM9\\QLKHO\\QLKHO.csproj",
         "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LENOVO\\OneDrive\\Documents\\Wordspace\\ThucTapCN\\Code\\Nhom9\\QLKHO_NHOM9\\QLKHO_NHOM9\\QLKHO\\obj\\",
+        "outputPath": "C:\\Users\\LENOVO\\OneDrive\\Documents\\Wordspace\\ThucTapCN\\Code\\QLKHO_NHOM9\\QLKHO\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -69,6 +69,10 @@
               "target": "Package",
               "version": "[5.0.17, )"
             },
+            "Microsoft.AspNetCore.Rewrite": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.17, )"
@@ -108,6 +112,10 @@
             "MimeKit": {
               "target": "Package",
               "version": "[4.0.0, )"
+            },
+            "Select.HtmlToPdf.NetCore": {
+              "target": "Package",
+              "version": "[22.2.0, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",

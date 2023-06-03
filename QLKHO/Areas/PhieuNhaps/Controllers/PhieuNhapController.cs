@@ -13,11 +13,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using SelectPdf;
 
 namespace QLKHO.Areas.PhieuNhaps.Controllers
 {
     [Area("PhieuNhaps")]
-    [Route("/[controller]/[action]")]
+    [Route("/[controller]/[action]/")]
     [Authorize(Roles = "Admin,NhanVien")]
     public class PhieuNhapController : Controller
     {
@@ -281,6 +282,18 @@ namespace QLKHO.Areas.PhieuNhaps.Controllers
             TempData["thongbao"] = $"Xóa Phiếu nhập có mã {phieunhap.MaPN} thành công";
             return RedirectToAction(nameof(Index));
         }
+        public IActionResult GeneratePdf(string html)
+        {
+            html = html.Replace("StrTag", "<").Replace("EndTag", ">");
+            HtmlToPdf oHtmlToPdf = new HtmlToPdf();
+            PdfDocument oPdfDocument = oHtmlToPdf.ConvertHtmlString(html);
+            byte[] pdf = oPdfDocument.Save();
+            oPdfDocument.Close();
+            return File(
+                pdf,
+                "application/pdf",
+                "PhieuNhap.pdf"
+                );
+        }
     }
-    
 }

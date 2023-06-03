@@ -9,57 +9,57 @@
     var i = 1;
 }
 <div>
-    <h2 class="text-center">Phiếu Nhập</h2>
-    <div class="row">
-        <div class="col-sm-6">
-            <p>Mã Phiếu: @Model.MaPN.</p>
-            <p>Ngày Lập: @String.Format("{0:dd/MM/yyyy}", Model.phieuNhap.NgayLap).</p>
-            <p>Tổng số lượng: @Model.phieuNhap.TongSoLuong.</p>
-        </div>
-        <div class="col-sm-6">
-            @if(Model.user != null)
-            {
-                <p>Người Lập: @Model.user.UserName - @Model.user.FullName.</p>
-            }
-            @if(Model.nhaCungCap != null)
-            {
-                <p>Nhà cung cấp: @Model.nhaCungCap.TenNcc</p>
-            }
-            <p>Tổng Tiền: @Model.phieuNhap.TongTien.ToString("C", new CultureInfo("vi-VN"))</p>
-        </div>
-    </div>
-    <div style="max-height: 800px" class="overflow-auto">
-        <table style="min-width: 600px" class="table table-bordered">
-            <thead>
-                <tr>
-                    <td>STT</td>
-                    <td>Mã Sản Phẩm</td>
-                    <td>Tên Sản Phẩm</td>
-                    <td>Hình ảnh</td>
-                    <td>Số Lượng</td>
-                    <td>Đơn Giá</td>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach(var item in Model.sp_ctpn)
+        <h2 class="text-center">Phiếu Nhập</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <p>Mã Phiếu: @Model.MaPN.</p>
+                <p>Ngày Lập: @String.Format("{0:dd/MM/yyyy}", Model.phieuNhap.NgayLap).</p>
+                <p>Tổng số lượng: @Model.phieuNhap.TongSoLuong.</p>
+            </div>
+            <div class="col-sm-6">
+                @if(Model.user != null)
                 {
-                    <tr>
-                        <td>
-                            @i
-                            @{i++;}
-                        </td>
-                        <td>@item.MaSp</td>
-                        <td>@item.TenSp</td>
-                        <td>
-                            <img class="img-thumbnail" style="width:100px; height:80px; object-fit:cover" src="~/Upload/PhotoSanPham/@item.Photo">
-                        </td>
-                        <td>@item.Soluong</td>
-                        <td>@item.DonGia.ToString("C", new CultureInfo("vi-VN"))</td>
-                    </tr>
+                    <p>Người Lập: @Model.user.UserName - @Model.user.FullName.</p>
                 }
-            </tbody>
-        </table>
-    </div>
+                @if(Model.nhaCungCap != null)
+                {
+                    <p>Nhà cung cấp: @Model.nhaCungCap.TenNcc</p>
+                }
+                <p>Tổng Tiền: @Model.phieuNhap.TongTien.ToString("C", new CultureInfo("vi-VN"))</p>
+            </div>
+        </div>
+        <div style="max-height: 800px" class="overflow-auto">
+            <table style="min-width: 600px" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>STT</td>
+                        <td>Mã Sản Phẩm</td>
+                        <td>Tên Sản Phẩm</td>
+                        <td>Hình ảnh</td>
+                        <td>Số Lượng</td>
+                        <td>Đơn Giá</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model.sp_ctpn)
+                    {
+                        <tr>
+                            <td>
+                                @i
+                                @{i++;}
+                            </td>
+                            <td>@item.MaSp</td>
+                            <td>@item.TenSp</td>
+                            <td>
+                                <img class="img-thumbnail" style="width:100px; height:80px; object-fit:cover" src="~/Upload/PhotoSanPham/@item.Photo">
+                            </td>
+                            <td>@item.Soluong</td>
+                            <td>@item.DonGia.ToString("C", new CultureInfo("vi-VN"))</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     <div class="my-2">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myPhieu">
@@ -95,4 +95,52 @@
     <div class="my-2">
         <a class="btn btn-primary" asp-action="Index">Quay lại danh sách</a>
     </div>
+    <div class="my-2">
+        <button id="btnPdf" class="btn btn-danger">In PDF</button>
+    </div>
 </div>
+<div id="pdfContainer" class="d-none" >
+    <h2>Phiếu Nhập</h2>
+    <div>
+        <div>
+            <p>Mã Phiếu: @Model.MaPN.</p>
+            <p>Ngày Lập: @String.Format("{0:dd/MM/yyyy}", Model.phieuNhap.NgayLap).</p>
+            <p>Tổng số lượng: @Model.phieuNhap.TongSoLuong.</p>
+        </div>
+        <div>
+            @if (Model.user != null)
+            {
+                <p>Người Lập: @Model.user.UserName - @Model.user.FullName.</p>
+            }
+            @if (Model.nhaCungCap != null)
+            {
+                <p>Nhà cung cấp: @Model.nhaCungCap.TenNcc</p>
+            }
+            <p>Tổng Tiền: @Model.phieuNhap.TongTien.ToString("C", new CultureInfo("vi-VN"))</p>
+        </div>
+    </div>
+    <div>
+        <span>Mã SP  |</span>
+        <span>Tên SP |</span>
+        <span>Số lượng |</span>
+        <span>Đơn Giá</span>
+    </div>
+    @foreach (var item in Model.sp_ctpn)
+    {
+        <div>
+            <span>@item.MaSp  |</span>
+            <span>@item.TenSp |</span>
+            <span>@item.Soluong |</span>
+            <span>@item.DonGia.ToString("C", new CultureInfo("vi-VN"))</span>
+        </div>
+    }
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        $("#btnPdf").click(() => {
+            var sHtml = $("#pdfContainer").html();
+            sHtml = sHtml.replace(/</g,"StrTag").replace(/>/g,"EndTag");
+            window.open("../PhieuNhap/GeneratePdf" + "?html=" + sHtml, '_blank')
+        })
+    </script>
+}
