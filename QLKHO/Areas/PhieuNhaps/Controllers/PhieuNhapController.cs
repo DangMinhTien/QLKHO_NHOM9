@@ -14,6 +14,9 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
 using SelectPdf;
+using System.Globalization;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using System.Text.Encodings.Web;
 
 namespace QLKHO.Areas.PhieuNhaps.Controllers
 {
@@ -25,12 +28,16 @@ namespace QLKHO.Areas.PhieuNhaps.Controllers
         private readonly AppDbContext _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-
-        public PhieuNhapController(AppDbContext context, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        private readonly IEmailSender _emailSender;
+        public PhieuNhapController(AppDbContext context, 
+            UserManager<AppUser> userManager, 
+            SignInManager<AppUser> signInManager,
+            IEmailSender emailSender)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailSender = emailSender;
         }
         public int ITEM_PER_PAGE = 10;
         public int currentPage { get; set; }
@@ -201,6 +208,10 @@ namespace QLKHO.Areas.PhieuNhaps.Controllers
             public NhaCungCap nhaCungCap { get; set; }
             public int MaPN { get; set; }
             public List<SP_CTPN> sp_ctpn { get; set; }
+            [DisplayName("Địa chỉ Email")]
+            [Required(ErrorMessage = "{0} không được để trống")]
+            [EmailAddress(ErrorMessage = "{0} phải là Email")]
+            public string Email { get; set; }
         }
         public class SP_CTPN
         {
@@ -282,9 +293,77 @@ namespace QLKHO.Areas.PhieuNhaps.Controllers
             TempData["thongbao"] = $"Xóa Phiếu nhập có mã {phieunhap.MaPN} thành công";
             return RedirectToAction(nameof(Index));
         }
-        public IActionResult GeneratePdf(string html)
+        public async Task<string> generateHtml(int id)
         {
-            html = html.Replace("StrTag", "<").Replace("EndTag", ">");
+            
+            PhieuNhap pn = await _context.phieuNhaps.SingleOrDefaultAsync(p => p.MaPN == id);
+            var sanpham_phieunhap = from sp in _context.sanPhams
+                                    join ct in _context.chiTietPhieuNhaps
+                                    on sp.MaSp equals ct.MaSp
+                                    where ct.MaPN == id
+                                    select new SP_CTPN
+                                    {
+                                        MaSp = sp.MaSp,
+                                        TenSp = sp.TenSp,
+                                        Photo = sp.Photo,
+                                        Soluong = ct.SoLuong,
+                                        DonGia = ct.DonGia
+                                    };
+
+            InputDetails inputDetails = new InputDetails()
+            {
+                phieuNhap = pn,
+                MaPN = pn.MaPN,
+                user = await _userManager.FindByIdAsync(pn.UserId),
+                nhaCungCap = await _context.nhaCungCaps.SingleOrDefaultAsync(nc => nc.MaNcc == pn.MaNcc),
+                sp_ctpn = sanpham_phieunhap.ToList()
+            };
+            string tbody = "";
+            int i = 1;
+            foreach(var item in inputDetails.sp_ctpn)
+            {
+                tbody += 
+                    "<tr>" +
+                        $"<td>{i++}</td> " +
+                        $"<td>{item.MaSp}</td> " +
+                        $"<td>{item.TenSp}</td> " +
+                        $"<td>{item.Soluong}</td>" +
+                        $"<td>{item.DonGia.ToString("C", new CultureInfo("vi-VN"))}</td>" +
+                    "</tr>";
+            }
+            string html = "" +
+                "<h2 style=\"text-align: center;\">Phiếu Nhập</h2>" +
+                "<div>" +
+                    "<div style=\"display: flex; width: 80%; margin: auto;\">" +
+                        $"<p style=\"width: 33%;\">Mã Phiếu: {inputDetails.MaPN}.</p>" +
+                        $"<p style=\"width: 33%;\">Ngày Lập: {String.Format("{0:dd/MM/yyyy}",inputDetails.phieuNhap.NgayLap)}.</p>" +
+                        $"<p style=\"width: 33%;\">Tổng số lượng: {inputDetails.phieuNhap.TongSoLuong}.</p>" +
+                    "</div>" +
+                    "<div style=\"display: flex; width: 80%; margin: auto;\">" +
+                        $"<p style=\"width: 33%;\">Người Lập: {inputDetails.user.FullName}-{inputDetails.user.UserName}.</p>" +
+                        $"<p style=\"width: 33%;\">Nhà cung cấp: {inputDetails.nhaCungCap.TenNcc}</p>" +
+                        $"<p style=\"width: 33%;\">Tổng Tiền:{inputDetails.phieuNhap.TongTien.ToString("C", new CultureInfo("vi-VN"))} </p> " +
+                    "</div>" +
+                "</div>" +
+                "<table style=\"width: 80%; margin: auto;\" border=\"1\"" +
+                "<thead>" +
+                    "<tr>" +
+                        "<th>STT</th>" +
+                        "<th>Mã Sản Phẩm</th> " +
+                        "<th>Tên Sản Phẩm</th>" +
+                        "<th>Số Lượng</th> " +
+                        "<th>Đơn Giá</th>" +
+                    "</tr>" +
+                "</thead>" +
+                "<tbody>" +
+                    $"{tbody}" +
+                "</tbody>" +
+                "</table>";
+            return html;
+        }
+        public async Task<IActionResult> GeneratePdf(int id)
+        {
+            string html = await generateHtml(id);
             HtmlToPdf oHtmlToPdf = new HtmlToPdf();
             PdfDocument oPdfDocument = oHtmlToPdf.ConvertHtmlString(html);
             byte[] pdf = oPdfDocument.Save();
@@ -294,6 +373,23 @@ namespace QLKHO.Areas.PhieuNhaps.Controllers
                 "application/pdf",
                 "PhieuNhap.pdf"
                 );
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SendPhieu(int id,[Bind("Email")]InputDetails inputDetails)
+        {
+            string html = await generateHtml(id);
+            try
+            {
+                await _emailSender.SendEmailAsync(inputDetails.Email, $"Phiếu Nhập mã {id}",html);
+            }
+            catch (Exception ex)
+            {
+                TempData["thongbao"] = "Error Gửi không thành công";
+                return RedirectToAction(nameof(Details), new {id = id});
+            }
+            TempData["thongbao"] = "Gửi phiếu nhập thành công";
+            return RedirectToAction(nameof(Details), new { id = id });
         }
     }
 }
