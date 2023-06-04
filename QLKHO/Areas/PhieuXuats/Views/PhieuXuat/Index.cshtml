@@ -13,15 +13,29 @@
 <h1>Danh sách Phiếu Xuất</h1>
 <hr />
 
-<p>
-    <a class="btn btn-outline-primary mb-1" asp-action="Create">Tạo mới</a>
-</p>
+<div class="d-flex justify-content-between">
+    <a class="btn btn-outline-primary my-2" asp-action="Create">Tạo mới</a>
+    <div class="">
+        <form method="get" asp-action="Index" class=" form-inline mr-auto my-2 mw-100 navbar-search">
+            <div class="input-group">
+                <input name="search" class="form-control bg-light border-0 small" placeholder="Tìm theo mã phiếu"
+                       aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
 <div class="overflow-auto">
     <table style="min-width: 600px;" class="table table-bordered">
         <thead>
             <tr>
                 <th>STT</th>
-                <th>Mã Phiếu Nhập</th>
+                <th>Mã Phiếu Xuất</th>
                 <th>Số Lượng</th>
                 <th>Tổng Tiền</th>
                 <th>Ngày Lập</th>
@@ -93,7 +107,7 @@
             {
                 currentPage = int.Parse(currentPage.ToString()),
                 countPage = int.Parse(countPage.ToString()),
-                generateUrl = (int? p) => Url.Action(nameof(Index), new { p = p })
+                generateUrl = (int? p) => Url.Action(nameof(Index), new { p = p, search = ViewBag.search })
             };
     <div class="float-right">
             <partial name="_Paging" model="@pagemodel"></partial>

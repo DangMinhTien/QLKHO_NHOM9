@@ -43,13 +43,19 @@ namespace QLKHO.Areas.PhieuNhaps.Controllers
         public int currentPage { get; set; }
         public int countPage { get; set; }
 
-        public async Task<IActionResult> Index(int? p)
+        public async Task<IActionResult> Index(int? p, string search)
         {
+            if (string.IsNullOrEmpty(search))
+            {
+                search = "";
+            }
             if (p != null)
             {
                 currentPage = p.Value;
             }
-            int total = await _context.phieuNhaps.CountAsync();
+            int total = await _context.phieuNhaps
+                                        .Where(pn => pn.MaPN.ToString().Contains(search))
+                                        .CountAsync();
 
             countPage = (int)Math.Ceiling((double)total / ITEM_PER_PAGE);
             if (currentPage < 1)
@@ -61,17 +67,20 @@ namespace QLKHO.Areas.PhieuNhaps.Controllers
             if(total > 0)
             {
                 phieuNhaps = await _context.phieuNhaps
+                            .Where(pn => pn.MaPN.ToString().Contains(search))
                             .Skip((currentPage - 1) * ITEM_PER_PAGE)
                             .Take(ITEM_PER_PAGE).ToListAsync();
 
             }
             else
             {
-                phieuNhaps = await _context.phieuNhaps.ToListAsync();
+                phieuNhaps = await _context.phieuNhaps
+                            .Where(pn => pn.MaPN.ToString().Contains(search))
+                            .ToListAsync();
             }
             ViewData["current"] = currentPage;
             ViewData["countpage"] = countPage;
-            
+            ViewData["search"] = search;
             return View(phieuNhaps);
         }
         public class InputModel
