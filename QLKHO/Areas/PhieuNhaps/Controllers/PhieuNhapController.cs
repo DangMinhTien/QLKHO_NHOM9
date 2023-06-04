@@ -88,7 +88,6 @@ namespace QLKHO.Areas.PhieuNhaps.Controllers
             public NhaCungCap nhaCungCap { get; set; }
             public List<SanPham> sanPhams { get; set; }
             public SelectList NhaCungCaps { get; set; }
-            [Range(0, double.MaxValue,ErrorMessage = "Đơn giá phải có lớn hơn {1}")]
             public decimal[] DonGia { get; set; }
             public int[] SoLuong { get; set; }
             public int[] MaSp { get; set; }
@@ -130,9 +129,9 @@ namespace QLKHO.Areas.PhieuNhaps.Controllers
                 }
                 inputModel = new InputModel()
                 {
-                    nhaCungCap = ncc,   
+                    nhaCungCap = ncc,
                     NhaCungCaps = new SelectList(_context.nhaCungCaps, "MaNcc", "TenNcc", id),
-                    sanPhams = sanPhams
+                    sanPhams = sanPhams.OrderBy(sp => sp.TenSp).ToList()
                 };
             }
             return View(inputModel);
@@ -169,10 +168,10 @@ namespace QLKHO.Areas.PhieuNhaps.Controllers
                 soluong += inputModel.SoLuong[i];
                 tongtien += inputModel.SoLuong[i] * inputModel.DonGia[i];
             }
-            
+            PhieuNhap phieunhap;
             try
             {
-                PhieuNhap phieunhap = new PhieuNhap()
+                phieunhap = new PhieuNhap()
                 {
                     NgayLap = inputModel.NgayLap,
                     TongSoLuong = soluong,
@@ -207,7 +206,7 @@ namespace QLKHO.Areas.PhieuNhaps.Controllers
                 TempData["thongbao"] = $"Error Tạo phiếu thất bại";
                 return RedirectToAction(nameof(Create), new {id = inputModel.MaNcc});
             }
-            TempData["thongbao"] = $"Tạo phiếu nhập thành công";
+            TempData["thongbao"] = $"Tạo phiếu nhập có mã {phieunhap.MaPN} thành công";
             return RedirectToAction(nameof(Index));
         }
         public class InputDetails
@@ -350,8 +349,8 @@ namespace QLKHO.Areas.PhieuNhaps.Controllers
                     "</div>" +
                     "<div style=\"display: flex; width: 80%; margin: auto;\">" +
                         $"<p style=\"width: 33%;\">Người Lập: {inputDetails.user.FullName}-{inputDetails.user.UserName}.</p>" +
-                        $"<p style=\"width: 33%;\">Nhà cung cấp: {inputDetails.nhaCungCap.TenNcc}</p>" +
-                        $"<p style=\"width: 33%;\">Tổng Tiền:{inputDetails.phieuNhap.TongTien.ToString("C", new CultureInfo("vi-VN"))} </p> " +
+                        $"<p style=\"width: 33%;\">Nhà cung cấp: {inputDetails.nhaCungCap.TenNcc}.</p>" +
+                        $"<p style=\"width: 33%;\">Tổng Tiền:{inputDetails.phieuNhap.TongTien.ToString("C", new CultureInfo("vi-VN"))}.</p> " +
                     "</div>" +
                 "</div>" +
                 "<table style=\"width: 80%; margin: auto;\" border=\"1\"" +
@@ -367,7 +366,22 @@ namespace QLKHO.Areas.PhieuNhaps.Controllers
                 "<tbody>" +
                     $"{tbody}" +
                 "</tbody>" +
-                "</table>";
+                "</table>" +
+                "<div style=\"width: 80%; margin: auto; display: flex;\">" +
+                    "<div style=\"text-align: center; width: 33%;\">" +
+                        "<p style=\"font-weight: bold; font-size: 16px; margin-bottom: 0px;\">Kế Toán Trưởng</p>" +
+                        "<p style=\"margin-top: 5px;\">(Ký và ghi rõ họ tên)</p>" +
+                    "</div>" +
+                    "<div style=\"text-align: center; width: 33%;\">" +
+                        "<p style=\"font-weight: bold; font-size: 16px; margin-bottom: 0px;\">Người Lập Đơn</p>" +
+                        "<p style=\"margin-top: 5px;\">(Ký tên)</p>" +
+                        $"<p style=\"margin-top: 70px;\">{inputDetails.user.FullName}</p>" +
+                    "</div>" +
+                    "<div style=\"text-align: center; width: 33%;\">" +
+                        "<p style=\"font-weight: bold; font-size: 16px; margin-bottom: 0px;\">Giám Đốc Kho</p>" +
+                        "<p style=\"margin-top: 5px;\">(Ký và ghi rõ họ tên)</p>" +
+                    "</div>" +
+                "</div>";
             return html;
         }
         public async Task<IActionResult> GeneratePdf(int id)
@@ -380,7 +394,7 @@ namespace QLKHO.Areas.PhieuNhaps.Controllers
             return File(
                 pdf,
                 "application/pdf",
-                "PhieuNhap.pdf"
+                $"PhieuNhap{id}.pdf"
                 );
         }
         [HttpPost]

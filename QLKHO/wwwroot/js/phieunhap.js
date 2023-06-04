@@ -21,13 +21,13 @@
                       data-val-number="Đơn giá phải là số." data-val-range="Đơn giá nên có giá có giá trị từ 0" 
                       data-val-range-max="1.7976931348623157E+308" data-val-range-min="0" data-val-required="Đơn giá không được để trống" 
                       name="DonGia" value="${$(ele).parent().parent().children(".first").next().next().attr("data-price") * 1}" 
-                        aria-describedby="DonGia-error" aria-invalid="true" min="0" required/>
+                        aria-describedby="DonGia-error" aria-invalid="true" min="0" required />
                     </td>
                     <td>
                       <input class="form-control input-validation-error soluong" type="number" data-val="true" 
                       data-val-range="Số lượng có nên có giá có giá trị lớn hơn 0" data-val-range-max="2147483647" 
                       data-val-range-min="1" data-val-required="Số lượng không được để trống" 
-                      name="SoLuong" value="1" aria-describedby="SoLuong-error" aria-invalid="true" min="1" required/>
+                      name="SoLuong" value="1" aria-describedby="SoLuong-error" aria-invalid="true" min="1" required />
                     </td>
                     <td class="thanhtien">
                       ${$(ele).parent().parent().children(".first").next().next().attr("data-price") * 1}

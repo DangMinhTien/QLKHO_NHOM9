@@ -88,7 +88,11 @@ namespace QLKHO.Areas.PhieuXuats.Controllers
             [DisplayName("Ngày Lập Phiếu")]
             [Required(ErrorMessage = "{0} không được để trống")]
             public DateTime NgayLap { get; set; } = DateTime.Now.Date;
+            [Required(ErrorMessage = "Phải nhập đơn giá")]
+            [Range(0, double.MaxValue, ErrorMessage = "Đơn giá không được âm")]
             public decimal[] DonGia { get; set; }
+            [Required(ErrorMessage = "Phải nhập số lượng")]
+            [Range(1, int.MaxValue, ErrorMessage = "Số lượng không được nhỏ hơn 1")]
             public int[] SoLuong { get; set; }
             [Required(ErrorMessage = "Phải chọn sản phẩm")]
             public int[] MaSp { get; set; }
@@ -98,7 +102,7 @@ namespace QLKHO.Areas.PhieuXuats.Controllers
         {
             InputModel inputModel = new InputModel()
             {
-                sanPhams = await _context.sanPhams.ToListAsync(),
+                sanPhams = await _context.sanPhams.OrderBy(sp => sp.TenSp).ToListAsync(),
                 khachHang = new SelectList(_context.khachHangs,"MaKh","TenKh")
             };
             return View(inputModel);
@@ -114,7 +118,7 @@ namespace QLKHO.Areas.PhieuXuats.Controllers
                 InputModel input = new InputModel()
                 {
                     NgayLap = inputModel.NgayLap,
-                    sanPhams = await _context.sanPhams.ToListAsync(),
+                    sanPhams = await _context.sanPhams.OrderBy(sp => sp.TenSp).ToListAsync(),
                     khachHang = new SelectList(_context.khachHangs, "MaKh", "TenKh",inputModel.MaKh)
                 };
                 return View(input);
@@ -125,7 +129,7 @@ namespace QLKHO.Areas.PhieuXuats.Controllers
                 InputModel input = new InputModel()
                 {
                     NgayLap = inputModel.NgayLap,
-                    sanPhams = await _context.sanPhams.ToListAsync(),
+                    sanPhams = await _context.sanPhams.OrderBy(sp => sp.TenSp).ToListAsync(),
                     khachHang = new SelectList(_context.khachHangs, "MaKh", "TenKh", inputModel.MaKh)
                 };
                 return View(input);
@@ -138,7 +142,7 @@ namespace QLKHO.Areas.PhieuXuats.Controllers
                     InputModel input = new InputModel()
                     {
                         NgayLap = inputModel.NgayLap,
-                        sanPhams = await _context.sanPhams.ToListAsync(),
+                        sanPhams = await _context.sanPhams.OrderBy(sp => sp.TenSp).ToListAsync(),
                         khachHang = new SelectList(_context.khachHangs, "MaKh", "TenKh", inputModel.MaKh)
                     };
                     return View(input);
@@ -157,7 +161,7 @@ namespace QLKHO.Areas.PhieuXuats.Controllers
                         InputModel input = new InputModel()
                         {
                             NgayLap = inputModel.NgayLap,
-                            sanPhams = await _context.sanPhams.ToListAsync(),
+                            sanPhams = await _context.sanPhams.OrderBy(sp => sp.TenSp).ToListAsync(),
                             khachHang = new SelectList(_context.khachHangs, "MaKh", "TenKh", inputModel.MaKh)
                         };
                         return View(input);
@@ -171,9 +175,10 @@ namespace QLKHO.Areas.PhieuXuats.Controllers
                 tongsoluong += inputModel.SoLuong[i];
                 tongtien += inputModel.DonGia[i] * inputModel.SoLuong[i];
             }
+            PhieuXuat phieuXuat;
             try
             {
-                PhieuXuat phieuXuat = new PhieuXuat()
+                phieuXuat = new PhieuXuat()
                 {
                     NgayLap = inputModel.NgayLap,
                     MaKh = inputModel.MaKh,
@@ -214,7 +219,7 @@ namespace QLKHO.Areas.PhieuXuats.Controllers
                 };
                 return View(input);
             }
-            TempData["thongbao"] = "Tạo phiếu nhập thành công";
+            TempData["thongbao"] = $"Tạo phiếu nhập {phieuXuat.MaPX} thành công";
             return RedirectToAction(nameof(Index));
         }
         public class InputDetails
@@ -353,8 +358,8 @@ namespace QLKHO.Areas.PhieuXuats.Controllers
                     "</div>" +
                     "<div style=\"display: flex; width: 80%; margin: auto;\">" +
                         $"<p style=\"width: 33%;\">Người Lập: {inputDetails.user.FullName}-{inputDetails.user.UserName}.</p>" +
-                        $"<p style=\"width: 33%;\">Khách Hàng: {inputDetails.khachHang.TenKh}</p>" +
-                        $"<p style=\"width: 33%;\">Tổng Tiền:{inputDetails.phieuXuat.TongTien.ToString("C", new CultureInfo("vi-VN"))} </p> " +
+                        $"<p style=\"width: 33%;\">Khách Hàng: {inputDetails.khachHang.TenKh}.</p>" +
+                        $"<p style=\"width: 33%;\">Tổng Tiền:{inputDetails.phieuXuat.TongTien.ToString("C", new CultureInfo("vi-VN"))}.</p> " +
                     "</div>" +
                 "</div>" +
                 "<table style=\"width: 80%; margin: auto;\" border=\"1\"" +
@@ -370,7 +375,22 @@ namespace QLKHO.Areas.PhieuXuats.Controllers
                 "<tbody>" +
                     $"{tbody}" +
                 "</tbody>" +
-                "</table>";
+                "</table>" +
+                "<div style=\"width: 80%; margin: auto; display: flex;\">" +
+                    "<div style=\"text-align: center; width: 33%;\">" +
+                        "<p style=\"font-weight: bold; font-size: 16px; margin-bottom: 0px;\">Kế Toán Trưởng</p>" +
+                        "<p style=\"margin-top: 5px;\">(Ký và ghi rõ họ tên)</p>" +
+                    "</div>" +
+                    "<div style=\"text-align: center; width: 33%;\">" +
+                        "<p style=\"font-weight: bold; font-size: 16px; margin-bottom: 0px;\">Người Lập Đơn</p>" +
+                        "<p style=\"margin-top: 5px;\">(Ký tên)</p>" +
+                        $"<p style=\"margin-top: 70px;\">{inputDetails.user.FullName}</p>" +
+                    "</div>" +
+                    "<div style=\"text-align: center; width: 33%;\">" +
+                        "<p style=\"font-weight: bold; font-size: 16px; margin-bottom: 0px;\">Giám Đốc Kho</p>" +
+                        "<p style=\"margin-top: 5px;\">(Ký và ghi rõ họ tên)</p>" +
+                    "</div>" +
+                "</div>";
             return html;
         }
         public async Task<IActionResult> GeneratePdf(int id)
@@ -383,7 +403,7 @@ namespace QLKHO.Areas.PhieuXuats.Controllers
             return File(
                 pdf,
                 "application/pdf",
-                "PhieuXuat.pdf"
+                $"PhieuXuat{id}.pdf"
                 );
         }
         [HttpPost]
