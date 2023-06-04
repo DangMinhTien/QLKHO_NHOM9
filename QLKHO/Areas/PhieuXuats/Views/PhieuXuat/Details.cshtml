@@ -62,38 +62,79 @@
             </tbody>
         </table>
     </div>
-    <div class="my-2">
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myPhieu">
-            Xóa Phiếu Xuất
-        </button>
+    <div class="my-2 d-flex flex-wrap">
+        <div class="my-2 flex-grow-1">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myPhieu">
+                Xóa Phiếu Xuất
+            </button>
 
-        <!-- The Modal -->
-        <div class="modal" id="myPhieu">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
+            <!-- The Modal -->
+            <div class="modal" id="myPhieu">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
 
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">Xóa Phiếu Xuất</h4>
-                        <button type="button" class="btn btn-close" data-bs-dismiss="modal">&times</button>
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Xóa Phiếu Xuất</h4>
+                            <button type="button" class="btn btn-close" data-bs-dismiss="modal">&times</button>
+                        </div>
+                        <form asp-action="Delete" method="post" asp-route-id="@Model.MaPx">
+                            <div class="modal-body">
+                                <h5 class="text-center">Bạn có muốn xóa phiếu xuất có mã @Model.MaPx ?</h5>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Xóa</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                        <!-- Modal body -->
                     </div>
-                    <form asp-action="Delete" method="post" asp-route-id="@Model.MaPx">
-                        <div class="modal-body">
-                            <h5 class="text-center">Bạn có muốn xóa phiếu xuất có mã @Model.MaPx ?</h5>
-                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="my-2 d-flex justify-content-around flex-wrap">
+            <a id="btnPdf" class="btn btn-danger mr-2" asp-action="GeneratePdf" asp-route-id="@Model.MaPx">In PDF</a>
+            <div class="">
+                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#guiPhieu">
+                    Gửi Email
+                </button>
+                <!-- The Modal -->
+                <div class="modal" id="guiPhieu">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
 
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Xóa</button>
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Gửi Phiếu Xuất</h4>
+                                <button type="button" class="btn btn-close" data-bs-dismiss="modal">&times</button>
+                            </div>
+                            <form asp-action="SendPhieu" method="post" asp-route-id="@Model.MaPx">
+                                <div class="modal-body">
+                                    <h3 class="text-center">Nhập Email để gửi phiếu có mã có mã @Model.MaPx ?</h3>
+                                </div>
+                                <div class="form-group mx-2">
+                                    <label asp-for="@Model.Email" class="control-label"></label>
+                                    <input asp-for="@Model.Email" class="form-control" />
+                                    <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Gửi</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+                            <!-- Modal body -->
                         </div>
-                    </form>
-                    <!-- Modal body -->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+
     <div class="my-2">
         <a class="btn btn-primary" asp-action="Index">Quay lại danh sách</a>
     </div>
