@@ -260,6 +260,16 @@ namespace QLKHO.Areas.NhaCungCaps.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(await _context.nhaCungCaps.FirstOrDefaultAsync(ncc => ncc.Email == nhaCungCap.Email) != null)
+                {
+                    TempData["thongbao"] = $"Error Email trên đã thuộc về nhà cung cấp khác";
+                    return View(nhaCungCap);
+                }
+                if (await _context.nhaCungCaps.FirstOrDefaultAsync(ncc => ncc.Sdt == nhaCungCap.Sdt) != null)
+                {
+                    TempData["thongbao"] = $"Error Số điện thoại trên đã thuộc về nhà cung cấp khác";
+                    return View(nhaCungCap);
+                }
                 try
                 {
                     _context.Add(nhaCungCap);
@@ -303,6 +313,18 @@ namespace QLKHO.Areas.NhaCungCaps.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (await _context.nhaCungCaps
+                    .FirstOrDefaultAsync(ncc => ncc.Email == nhaCungCap.Email && ncc.MaNcc != nhaCungCap.MaNcc) != null)
+                {
+                    TempData["thongbao"] = $"Error Email trên đã thuộc về nhà cung cấp khác";
+                    return View(nhaCungCap);
+                }
+                if (await _context.nhaCungCaps
+                    .FirstOrDefaultAsync(ncc => ncc.Sdt == nhaCungCap.Sdt && ncc.MaNcc != nhaCungCap.MaNcc) != null)
+                {
+                    TempData["thongbao"] = $"Error Số điện thoại trên đã thuộc về nhà cung cấp khác";
+                    return View(nhaCungCap);
+                }
                 try
                 {
                     _context.Update(nhaCungCap);

@@ -68,10 +68,20 @@ namespace QLKHO.Areas.KhachHangs.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaKh,TenKh,Email,Phone")] KhachHang khachHang)
+        public async Task<IActionResult> Create([Bind("TenKh,Email,Phone")] KhachHang khachHang)
         {
             if (ModelState.IsValid)
             {
+                if(await _context.khachHangs.FirstOrDefaultAsync(kh => kh.Email == khachHang.Email) != null)
+                {
+                    TempData["thongbao"] = "Error Email bị trùng với khách hàng khác";
+                    return View(khachHang);
+                }
+                if (await _context.khachHangs.FirstOrDefaultAsync(kh => kh.Phone == khachHang.Phone) != null)
+                {
+                    TempData["thongbao"] = "Error Số điện thoại bị trùng với khách hàng khác";
+                    return View(khachHang);
+                }
                 try
                 {
                     _context.Add(khachHang);
@@ -114,6 +124,18 @@ namespace QLKHO.Areas.KhachHangs.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (await _context.khachHangs
+                    .FirstOrDefaultAsync(kh => kh.Email == khachHang.Email && kh.MaKh != khachHang.MaKh) != null)
+                {
+                    TempData["thongbao"] = "Error Email bị trùng với khách hàng khác";
+                    return View(khachHang);
+                }
+                if (await _context.khachHangs
+                    .FirstOrDefaultAsync(kh => kh.Phone == khachHang.Phone && kh.MaKh != khachHang.MaKh) != null)
+                {
+                    TempData["thongbao"] = "Error Số điện thoại bị trùng với khách hàng khác";
+                    return View(khachHang);
+                }
                 try
                 {
                     _context.Update(khachHang);
