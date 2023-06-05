@@ -46,10 +46,16 @@ namespace QLKHO.Areas.DonViTinhs.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(await _context.donViTinhs.FirstOrDefaultAsync(dvt => dvt.TenDvt == donViTinh.TenDvt) != null)
+                {
+                    TempData["thongbao"] = "Error Tên đơn vị tính bị trùng";
+                    return View(donViTinh);
+                }
                 _context.Add(donViTinh);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            TempData["thongbao"] = "Error Chưa nhập đủ dữ liệu";
             return View(donViTinh);
         }
 
@@ -79,6 +85,12 @@ namespace QLKHO.Areas.DonViTinhs.Controllers
 
             if (ModelState.IsValid)
             {
+                if(await _context.donViTinhs
+                    .FirstOrDefaultAsync(dvt => dvt.TenDvt == donViTinh.TenDvt && dvt.MaDvt != donViTinh.MaDvt) != null)
+                {
+                    TempData["Thongbao"] = $"Error Tên đơn vị tính bị trùng";
+                    return View(donViTinh);
+                }
                 try
                 {
                     _context.Update(donViTinh);
@@ -95,9 +107,10 @@ namespace QLKHO.Areas.DonViTinhs.Controllers
                         throw;
                     }
                 }
-                TempData["Thongbao"] = $"Bạn vừa sửa thành công đơn vị tính có mã {donViTinh.MaDvt}";
+                TempData["Thongbao"] = $"Bạn vừa sửa thành công đơn vị tính có mã {donViTinh.MaDvt} thành công";
                 return RedirectToAction(nameof(Index));
             }
+            TempData["Thongbao"] = $"Error Chưa nhập đủ dữ liệu";
             return View(donViTinh);
         }
 
