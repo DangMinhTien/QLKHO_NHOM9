@@ -2,6 +2,9 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @using System.Globalization
+@using Newtonsoft.Json
+@using System.Globalization
+@model QLKHO.Areas.ThongKes.Controllers.ThongKeController.BaoCao
 @{
 
 }
@@ -83,3 +86,137 @@
         </div>
     </div>
 </div>
+<div class="">
+    <label class="control-label">Chọn năm xem thống kê kinh doanh</label>
+    <form method="get" asp-action="Index" class=" form-inline mr-auto my-2 mw-100 navbar-search">
+        <div class="input-group">
+            <select asp-for="@Model.searchYear" class="form-control bg-light border-1 small px-5" placeholder="Chọn năm"
+                    aria-label="Search" aria-describedby="basic-addon2">
+                @for(int i = 2015; i <= DateTime.Now.Year; i++)
+                {
+                    <option value="@i">Năm @i</option>
+                }
+            </select>
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<div>
+    <h2 class="text-center">Thống kê kinh doanh năm @Model.searchYear</h2>
+    <div class="overflow-auto">
+        <canvas id="myChart" style="width:100%; min-width: 600px; min-height: 400px"></canvas>
+    </div>
+    <h2 class="text-center">Bảng Thống kê kinh doanh năm @Model.searchYear</h2>
+    <div class="overflow-auto">
+        <table class="table table-bordered" style="min-width: 600px">
+            <thead>
+                <tr>
+                    <th>Tháng</th>
+                    <th>Vốn bỏ ra</th>
+                    <th>Doanh Thu</th>
+                    <th>Lãi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(int i = 0; i < Model.baoCaoDoanhThus.Count(); i++)
+                {
+                    <tr>
+                        <td>Tháng @Model.baoCaoDoanhThus[i].thang</td>
+                        <td>@Model.baoCaoVons[i].TongTien.ToString("C", new CultureInfo("vi-VN"))</td>
+                        <td>@Model.baoCaoDoanhThus[i].TongTien.ToString("C", new CultureInfo("vi-VN"))</td>
+                        <td>
+                            @{
+                                var lai = Model.baoCaoDoanhThus[i].TongTien - Model.baoCaoVons[i].TongTien;
+                            }
+                            @lai.ToString("C", new CultureInfo("vi-VN"))
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td>Tổng năm @Model.searchYear</td>
+                    <td>@Model.baoCaoVons.Sum(bc => bc.TongTien).ToString("C", new CultureInfo("vi-VN"))</td>
+                    <td>@Model.baoCaoDoanhThus.Sum(bc => bc.TongTien).ToString("C", new CultureInfo("vi-VN"))</td>
+                    <td>
+                        @{
+                            var lainam = Model.baoCaoDoanhThus.Sum(bc => bc.TongTien) - Model.baoCaoVons.Sum(bc => bc.TongTien);
+                        }
+                        @lainam.ToString("C", new CultureInfo("vi-VN"))
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/Assets/vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/Assets/js/demo/chart-area-demo.js"></script>
+    <script src="~/Assets/js/demo/chart-pie-demo.js"></script>
+    <script type="text/javascript">
+        var ctx = document.getElementById('myChart').getContext('2d');
+       
+        var lsvon = [];
+
+        var lsdoanhthu = [];
+        @{
+            for(int i = 0; i < Model.baoCaoVons.Count(); i++)
+            {
+                @:lsvon.push(@Model.baoCaoVons[i].TongTien)
+            }
+            for(int i = 0; i < Model.baoCaoDoanhThus.Count(); i++)
+            {
+                @:lsdoanhthu.push(@Model.baoCaoDoanhThus[i].TongTien)
+            }
+        }
+        // Dữ liệu cho biểu đồ
+        var data = {
+            labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+            datasets: [{
+                label: 'Vốn bỏ ra',
+                data: lsvon,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }, {
+                label: 'Doanh Thu',
+                data: lsdoanhthu,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        // Cấu hình biểu đồ
+        var options = {
+            plugins: {
+                datalabels: {
+                    anchor: 'end',
+                    align: 'end',
+                    offset: -10,
+                    color: 'black',
+                    font: {
+                        weight: 'bold'
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        // Tạo biểu đồ
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+    </script>
+    </script>
+}
