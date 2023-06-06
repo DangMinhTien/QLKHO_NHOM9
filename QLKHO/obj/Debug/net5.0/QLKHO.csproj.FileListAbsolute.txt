@@ -1374,3 +1374,7 @@ C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\QLKHO_NHOM9\QLKHO\ob
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\ref\QLKHO.dll
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\QLKHO_NHOM9\QLKHO\bin\Debug\net5.0\Select.Html.dep
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\QLKHO_NHOM9\QLKHO\bin\Debug\net5.0\Select.HtmlToPdf.dll
+C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\QLKHO_NHOM9\QLKHO\bin\Debug\net5.0\EPPlus.dll
+C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\QLKHO_NHOM9\QLKHO\bin\Debug\net5.0\EPPlus.Interfaces.dll
+C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\QLKHO_NHOM9\QLKHO\bin\Debug\net5.0\EPPlus.System.Drawing.dll
+C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\QLKHO_NHOM9\QLKHO\bin\Debug\net5.0\Microsoft.IO.RecyclableMemoryStream.dll

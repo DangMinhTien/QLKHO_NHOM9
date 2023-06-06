@@ -97,10 +97,14 @@
             </div>
         </div>
         <div class="my-2 d-flex justify-content-around flex-wrap">
-            <a id="btnPdf" class="btn btn-danger mr-2" asp-action="GeneratePdf" asp-route-id="@Model.MaPx">In PDF</a>
+            <a id="btnPdf" class="btn btn-danger mr-2" asp-action="GeneratePdf" asp-route-id="@Model.MaPx">
+                Xuất PDF
+                <i class="far fa-file-pdf ml-1"></i>
+            </a>
             <div class="">
                 <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#guiPhieu">
                     Gửi Email
+                    <i class="fas fa-envelope ml-1"></i>
                 </button>
                 <!-- The Modal -->
                 <div class="modal" id="guiPhieu">

@@ -87,7 +87,7 @@
     </div>
 </div>
 <div class="">
-    <label class="control-label">Chọn năm xem thống kê kinh doanh</label>
+    <label class="control-label my-0">Chọn năm xem thống kê kinh doanh</label>
     <form method="get" asp-action="Index" class=" form-inline mr-auto my-2 mw-100 navbar-search">
         <div class="input-group">
             <select asp-for="@Model.searchYear" class="form-control bg-light border-1 small px-5" placeholder="Chọn năm"
@@ -110,7 +110,11 @@
     <div class="overflow-auto">
         <canvas id="myChart" style="width:100%; min-width: 600px; min-height: 400px"></canvas>
     </div>
-    <h2 class="text-center">Bảng Thống kê kinh doanh năm @Model.searchYear</h2>
+    <h2 class="text-center my-2">Bảng Thống kê kinh doanh năm @Model.searchYear</h2>
+    <a asp-action="ExportExcel" asp-route-year="@Model.searchYear" class="btn btn-success my-2" style="background-color:#016e3a">
+        Xuất Excel
+        <i class="fas fa-file-excel ml-1"></i>
+    </a>
     <div class="overflow-auto">
         <table class="table table-bordered" style="min-width: 600px">
             <thead>
@@ -155,8 +159,7 @@
     <script src="~/Assets/vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="~/Assets/js/demo/chart-area-demo.js"></script>
-    <script src="~/Assets/js/demo/chart-pie-demo.js"></script>
+   
     <script type="text/javascript">
         var ctx = document.getElementById('myChart').getContext('2d');
        
