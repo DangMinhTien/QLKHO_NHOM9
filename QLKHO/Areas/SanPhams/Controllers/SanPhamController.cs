@@ -45,7 +45,9 @@ namespace QLKHO.Areas.SanPhams.Controllers
             {
                 currentPage = p.Value;
             }
-            int total = await _context.sanPhams.Where(sp => sp.TenSp.Contains(search)).CountAsync();
+            int total = await _context.sanPhams
+                .Where(sp => sp.TenSp.Contains(search) || sp.MaSp.ToString().Contains(search))
+                .CountAsync();
             
             countPage = (int)Math.Ceiling((double)total / ITEM_PER_PAGE);
             if (currentPage < 1)
@@ -56,14 +58,14 @@ namespace QLKHO.Areas.SanPhams.Controllers
             if (total > 0)
             {
                 sanphams = await _context.sanPhams
-                        .Where(sp => sp.TenSp.Contains(search))
+                        .Where(sp => sp.TenSp.Contains(search) || sp.MaSp.ToString().Contains(search))
                         .Skip((currentPage - 1) * ITEM_PER_PAGE)
                         .Take(ITEM_PER_PAGE).Include(s => s.DonViTinh).ToListAsync();
             }
             else
             {
                 sanphams = await _context.sanPhams
-                                .Where(sp => sp.TenSp.Contains(search))
+                                .Where(sp => sp.TenSp.Contains(search) || sp.MaSp.ToString().Contains(search))
                                 .Include(s => s.DonViTinh).ToListAsync();
             }
             ViewData["current"] = currentPage;

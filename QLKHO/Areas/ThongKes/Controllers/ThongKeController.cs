@@ -6,8 +6,10 @@ using OfficeOpenXml;
 using QLKHO.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace QLKHO.Areas.ThongKes.Controllers
@@ -34,6 +36,8 @@ namespace QLKHO.Areas.ThongKes.Controllers
             public List<BaoCaoVon> baoCaoVons { get; set; }
             public List<BaoCaoDoanhThu> baoCaoDoanhThus { get; set; }
             public int? searchYear { get; set; }
+            public List<SanPhamByRangePrice> baoCaoSpByPrice { get; set; }
+            public List<SanPhamBan> baoCaoSanPhamBan { get; set; }
         }
         public class BaoCaoVon
         {
@@ -44,6 +48,127 @@ namespace QLKHO.Areas.ThongKes.Controllers
         {
             public int thang { get; set; }
             public decimal TongTien { get; set; }
+        }
+        public class SanPhamByRangePrice
+        {
+            public int soLuong { get; set; }
+            public int khoangGia { get; set; }
+        }
+        public class SanPhamBan
+        {
+            public int MaSp { get; set; }
+            public string TenSp { get; set; }
+            public int soLuong { get; set; }
+        }
+        public List<SanPhamByRangePrice> CreateSPByRangePrice()
+        {
+            var lstsp = new List<SanPhamByRangePrice>();
+            foreach(var item in _context.sanPhams)
+            {
+                if(item.GiaBan < 1000000)
+                {
+                    lstsp.Add(new SanPhamByRangePrice
+                    {
+                        soLuong = item.SoLuongCo,
+                        khoangGia = 1
+                    });
+                }
+                else if(item.GiaBan < 2500000)
+                {
+                    lstsp.Add(new SanPhamByRangePrice
+                    {
+                        soLuong = item.SoLuongCo,
+                        khoangGia = 2
+                    });
+                }
+                else if(item.GiaBan < 5000000)
+                {
+                    lstsp.Add(new SanPhamByRangePrice
+                    {
+                        soLuong = item.SoLuongCo,
+                        khoangGia = 3
+                    });
+                }
+                else if(item.GiaBan < 10000000)
+                {
+                    lstsp.Add(new SanPhamByRangePrice
+                    {
+                        soLuong = item.SoLuongCo,
+                        khoangGia = 4
+                    });
+                }
+                else
+                {
+                    lstsp.Add(new SanPhamByRangePrice
+                    {
+                        soLuong = item.SoLuongCo,
+                        khoangGia = 5
+                    });
+                }
+            }
+            var lsSp_by_price = (from sp in lstsp
+                                group sp by sp.khoangGia into g
+                                select new SanPhamByRangePrice
+                                {
+                                    soLuong = g.ToList().Sum(sp => sp.soLuong),
+                                    khoangGia = g.Key
+                                }).ToList();
+            for(int i = 1; i <= 5; i++)
+            {
+                var item = lsSp_by_price.FirstOrDefault(s => s.khoangGia == i);
+                if(item == null)
+                {
+                    lsSp_by_price.Add(new SanPhamByRangePrice()
+                    {
+                        khoangGia = i,
+                        soLuong = 0
+                    });
+                }
+            }
+            return lsSp_by_price.OrderBy(s => s.khoangGia).ToList();
+        }
+        public List<SanPhamBan> TopSpMua()
+        {
+            var lstctpx = (from ctpx in _context.chiTietPhieuXuats
+                          group ctpx by ctpx.MaSp into g
+                          select new
+                          {
+                              Masp = g.Key,
+                              Soluong = g.ToList().Sum(a => a.SoLuong)
+                          }).ToList();
+            var lstSp = (from ct in lstctpx
+                        join sp in _context.sanPhams
+                        on ct.Masp equals sp.MaSp
+                        select new SanPhamBan
+                        {
+                            MaSp = sp.MaSp,
+                            TenSp = RemoveDiacritics(sp.TenSp),
+                            soLuong = ct.Soluong
+                        }).ToList();
+            if(lstSp.Count() > 7)
+            {
+                return lstSp.OrderByDescending(ls => ls.soLuong).Take(7).ToList();
+            }
+            else
+            {
+                return lstSp.OrderByDescending(ls => ls.soLuong).ToList();
+            }
+        }
+        // chuyển chuỗi có dấu thành không dấu
+        public static string RemoveDiacritics(string input)
+        {
+            string normalizedString = input.Normalize(NormalizationForm.FormD);
+            StringBuilder stringBuilder = new StringBuilder();
+
+            foreach (char c in normalizedString)
+            {
+                if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder.ToString();
         }
         public BaoCao CreateBaoCao(int? year)
         {
@@ -83,6 +208,8 @@ namespace QLKHO.Areas.ThongKes.Controllers
                 baoCaoVons = bcvon.OrderBy(bc => bc.thang).ToList(),
                 baoCaoDoanhThus = bcdoanhthu.OrderBy(bc => bc.thang).ToList(),
                 searchYear = year,
+                baoCaoSpByPrice = CreateSPByRangePrice(),
+                baoCaoSanPhamBan = TopSpMua()
             };
             return baocao;
         }
@@ -96,7 +223,6 @@ namespace QLKHO.Areas.ThongKes.Controllers
             if(searchYear == null)
                 searchYear = DateTime.Now.Year;
             BaoCao baocao = CreateBaoCao(searchYear);
-
             return View(baocao);
         }
         public IActionResult ExportExcel(int? year)

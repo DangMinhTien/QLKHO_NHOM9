@@ -31,13 +31,17 @@ namespace QLKHO.Areas.NhaCungCaps.Controllers
         public int currentPage { get; set; }
         public int countPage { get; set; }
 
-        public async Task<IActionResult> Index(int? p)
+        public async Task<IActionResult> Index(int? p, string search)
         {
             if (p != null)
             {
                 currentPage = p.Value;
             }
-            int total = await _context.nhaCungCaps.CountAsync();
+            if(string.IsNullOrEmpty(search))
+            {
+                search = "";
+            }
+            int total = await _context.nhaCungCaps.Where(ncc => ncc.TenNcc.Contains(search)).CountAsync();
 
             countPage = (int)Math.Ceiling((double)total / ITEM_PER_PAGE);
             if (currentPage < 1)
@@ -49,16 +53,20 @@ namespace QLKHO.Areas.NhaCungCaps.Controllers
             if(total > 0)
             {
                 nhaCungCaps = await _context.nhaCungCaps
+                            .Where(ncc => ncc.TenNcc.Contains(search))
                             .Skip((currentPage - 1) * ITEM_PER_PAGE)
                             .Take(ITEM_PER_PAGE).ToListAsync();
 
             }
             else
             {
-                nhaCungCaps = await _context.nhaCungCaps.ToListAsync();
+                nhaCungCaps = await _context.nhaCungCaps
+                                    .Where(ncc => ncc.TenNcc.Contains(search))
+                                    .ToListAsync();
             }
             ViewData["current"] = currentPage;
             ViewData["countpage"] = countPage;
+            ViewData["search"] = search;
             return View(nhaCungCaps);
         }
 
@@ -147,8 +155,11 @@ namespace QLKHO.Areas.NhaCungCaps.Controllers
             };
             if(search != null)
             {
-                inputModel.sanPhams = await _context.sanPhams.Where(sp => sp.TenSp.Contains(search)).Include(s => s.DonViTinh).ToListAsync();
+                inputModel.sanPhams = await _context.sanPhams
+                    .Where(sp => sp.TenSp.Contains(search))
+                    .Include(s => s.DonViTinh).ToListAsync();
             }
+            ViewData["search"] = search;
             return View(inputModel);
         }
         [HttpPost]

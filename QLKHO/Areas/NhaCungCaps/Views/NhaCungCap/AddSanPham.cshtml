@@ -11,7 +11,7 @@
     <form asp-action="AddSanPham" method="get" class=" form-inline mr-auto my-2 mw-100 navbar-search">
         <div class="input-group">
             <input type="hidden" name="id" value="@Model.MaNcc" />
-            <input type="text" name="search" class="form-control bg-light border-0 small" placeholder="Tìm sản phẩm"
+            <input type="text" name="search" value="@ViewBag.search" class="form-control bg-light border-0 small" placeholder="Tìm sản phẩm"
                    aria-label="Search" aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <button class="btn btn-primary" type="submit">
