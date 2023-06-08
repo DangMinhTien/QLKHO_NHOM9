@@ -1264,7 +1264,6 @@ C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\QLKHO_NHOM9\QLKHO\ob
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\QLKHO.TagHelpers.output.cache
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\QLKHO.RazorCoreGenerate.cache
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\Admin\Pages\Roles\Create.cshtml.g.cs
-C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\Admin\Pages\Roles\Delete.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\Admin\Pages\Roles\Edit.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\Admin\Pages\Roles\Index.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Documents\Wordspace\ThucTapCN\Code\QLKHO_NHOM9\QLKHO\obj\Debug\net5.0\Razor\Areas\Admin\Pages\Users\AddRole.cshtml.g.cs

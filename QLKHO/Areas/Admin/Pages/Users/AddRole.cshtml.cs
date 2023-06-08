@@ -73,8 +73,8 @@ namespace QLKHO.Areas.Admin.Pages.Users
                 return Page();
             }
             var OldRoleNames = (await _userManager.GetRolesAsync(user)).ToArray<string>();
-            var deleteRole = OldRoleNames.Where(r => !RoleNames.Contains(r));
-            var addRoles = RoleNames.Where(r => !OldRoleNames.Contains(r));
+            var deleteRole = OldRoleNames.Where(r => !RoleNames.Contains(r)); // lấy những bản ghi không nằm trong RoleNames
+            var addRoles = RoleNames.Where(r => !OldRoleNames.Contains(r)); // lấy những bản ghi không năm trong OldRoleNames
             var resultdelete = await _userManager.RemoveFromRolesAsync(user, deleteRole);
             if (!resultdelete.Succeeded)
             {
